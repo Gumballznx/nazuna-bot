@@ -19076,7 +19076,7 @@ return reply('🤖 *Sistema temporariamente indisponível*');
         try {
           await reply('📦 Baixando o código-fonte do bot... Aguarde!');
 
-          const zipResponse = await axios.get('https://github.com/hiudyy/nazuna/archive/refs/heads/main.zip', {
+          const zipResponse = await axios.get('https://github.com/Gumballznx/nazuna-bot/archive/refs/heads/main.zip', {
             responseType: 'arraybuffer',
             timeout: 60000
           });
@@ -19089,7 +19089,7 @@ return reply('🤖 *Sistema temporariamente indisponível*');
             document: Buffer.from(zipResponse.data),
             fileName: 'nazuna-bot.zip',
             mimetype: 'application/zip',
-            caption: `📦 *Código-fonte do ${nomebot}*\n\n📖 Leia a documentação no repositório para entender melhor como instalar:\n🔗 https://github.com/hiudyy/nazuna\n\n⚠️ *Importante:* Certifique-se de ter Node.js instalado e siga os passos do README.md!`
+            caption: `📦 *Código-fonte do ${nomebot}*\n\n📖 Leia a documentação no repositório para entender melhor como instalar:\n🔗 https://github.com/Gumballznx/nazuna-bot\n\n⚠️ *Importante:* Certifique-se de ter Node.js instalado e siga os passos do README.md!`
           }, { quoted: info });
 
         } catch (e) {
@@ -19100,7 +19100,7 @@ return reply('🤖 *Sistema temporariamente indisponível*');
               ? '❌ Tempo de conexão esgotado. Tente novamente.'
               : '❌ Erro ao baixar o arquivo.';
 
-          await reply(`${errorMsg}\n\nTente acessar diretamente:\n🔗 https://github.com/hiudyy/nazuna`);
+          await reply(`${errorMsg}\n\nTente acessar diretamente:\n🔗 https://github.com/Gumballznx/nazuna-bot`);
         }
         break;
       case 'gitbot':
@@ -19117,8 +19117,8 @@ return reply('🤖 *Sistema temporariamente indisponível*');
             const githubHeaders = { 'Accept': 'application/vnd.github+json' };
 
             Promise.all([
-              axios.get('https://api.github.com/repos/hiudyy/nazuna', { headers: githubHeaders }),
-              axios.get('https://api.github.com/repos/hiudyy/nazuna/commits?per_page=1', { headers: githubHeaders })
+              axios.get('https://api.github.com/repos/Gumballznx/nazuna-bot', { headers: githubHeaders }),
+              axios.get('https://api.github.com/repos/Gumballznx/nazuna-bot/commits?per_page=1', { headers: githubHeaders })
             ]).then(([repoResponse, commitsResponse]) => {
               const repo = repoResponse.data;
 
@@ -19174,7 +19174,7 @@ return reply('🤖 *Sistema temporariamente indisponível*');
 │ • Repo: ${repo.html_url}
 │ • Clone: ${repo.clone_url}
 │
-│ 📞 *Suporte:* wa.me/553399285117
+│ 📞 *Suporte:* wa.me/${String(numerodono).replace(/\D/g, '')}
 │
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
@@ -19183,7 +19183,7 @@ return reply('🤖 *Sistema temporariamente indisponível*');
               reply(gitInfo);
             }).catch((e) => {
               console.error('Erro ao buscar info do GitHub:', e);
-              reply(`❌ Erro ao buscar informações. Acesse diretamente:\n🔗 https://github.com/hiudyy/nazuna\n📞 Suporte: wa.me/553399285117`);
+              reply(`❌ Erro ao buscar informações. Acesse diretamente:\n🔗 https://github.com/Gumballznx/nazuna-bot\n📞 Suporte: wa.me/${String(numerodono).replace(/\D/g, '')}`);
             });
           });
         } catch (e) {
