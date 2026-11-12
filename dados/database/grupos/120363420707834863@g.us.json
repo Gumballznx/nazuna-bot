@@ -1,0 +1,50 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-10T08:09:19.588Z",
+  "groupName": "Networking txapilog",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "159034049044504@lid",
+      "msg": 17,
+      "cmd": 7,
+      "figu": 1,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-07-11T14:15:25.367Z",
+      "lastActivity": "2026-10-11T12:38:28.347Z"
+    },
+    {
+      "id": "55629070745660@lid",
+      "msg": 75,
+      "cmd": 0,
+      "figu": 12,
+      "pushname": "D",
+      "firstSeen": "2026-07-10T08:09:53.960Z",
+      "lastActivity": "2026-10-11T09:23:40.847Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Senna bot",
+      "firstSeen": "2026-07-20T10:57:41.882Z",
+      "lastActivity": "2026-07-20T10:57:41.882Z"
+    }
+  ],
+  "antilinkgp": true,
+  "bemvindo": true,
+  "welcome": {
+    "image": "banner"
+  },
+  "antilinksoft": true
+}

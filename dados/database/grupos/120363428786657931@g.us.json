@@ -1,0 +1,81 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-31T11:31:16.806Z",
+  "groupName": "PPP 🫦",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "68685872005342@lid",
+      "msg": 685,
+      "cmd": 4,
+      "figu": 188,
+      "pushname": "wiu2hemmy_",
+      "firstSeen": "2026-08-12T20:36:41.205Z",
+      "lastActivity": "2026-08-18T21:18:35.885Z"
+    },
+    {
+      "id": "248236610715704@lid",
+      "msg": 748,
+      "cmd": 16,
+      "figu": 85,
+      "pushname": "I Luv Barça And Messi 😍",
+      "firstSeen": "2026-07-31T11:31:16.820Z",
+      "lastActivity": "2026-08-18T22:25:19.452Z"
+    },
+    {
+      "id": "21720404594743@lid",
+      "msg": 88,
+      "cmd": 0,
+      "figu": 33,
+      "pushname": "𝓦𝓲𝓷𝓭𝔃𝔂 𝓫𝓮𝓷𝓳𝓪𝓶𝓲𝓶🪷",
+      "firstSeen": "2026-07-31T18:29:44.620Z",
+      "lastActivity": "2026-08-18T19:33:38.426Z"
+    },
+    {
+      "id": "177365321805931@lid",
+      "msg": 384,
+      "cmd": 11,
+      "figu": 63,
+      "pushname": "non.breezy",
+      "firstSeen": "2026-07-31T16:52:16.707Z",
+      "lastActivity": "2026-08-18T19:37:01.820Z"
+    },
+    {
+      "id": "56857213284443@lid",
+      "msg": 99,
+      "cmd": 1,
+      "figu": 27,
+      "pushname": "Keyla",
+      "firstSeen": "2026-07-31T16:39:25.983Z",
+      "lastActivity": "2026-08-18T19:29:40.063Z"
+    },
+    {
+      "id": "242305596416060@lid",
+      "msg": 14,
+      "cmd": 4,
+      "figu": 0,
+      "pushname": "Allannnn",
+      "firstSeen": "2026-08-14T16:47:27.032Z",
+      "lastActivity": "2026-08-18T19:13:10.505Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 4,
+      "cmd": 3,
+      "figu": 0,
+      "pushname": "Senna bot",
+      "firstSeen": "2026-08-19T10:24:04.443Z",
+      "lastActivity": "2026-08-19T10:25:54.658Z"
+    }
+  ],
+  "soadm": true
+}

@@ -1,0 +1,71 @@
+{
+  "mark": {},
+  "createdAt": "2026-04-18T22:42:49.959Z",
+  "groupName": "👾JÚNI BOT👾",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "155225067397126@lid",
+      "msg": 44,
+      "cmd": 27,
+      "figu": 2,
+      "pushname": "JÚNI ZERA",
+      "firstSeen": "2026-04-18T22:42:49.962Z",
+      "lastActivity": "2026-04-23T19:23:54.757Z"
+    },
+    {
+      "id": "58824593567880@lid",
+      "msg": 52,
+      "cmd": 0,
+      "figu": 23,
+      "pushname": "Dylux bot",
+      "firstSeen": "2026-04-18T22:42:51.089Z",
+      "lastActivity": "2026-04-23T20:34:49.396Z"
+    },
+    {
+      "id": "181007839936625@lid",
+      "msg": 10,
+      "cmd": 4,
+      "figu": 0,
+      "pushname": "Eddy💜",
+      "firstSeen": "2026-04-18T22:44:49.175Z",
+      "lastActivity": "2026-04-20T20:31:04.561Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "nazuna bot",
+      "firstSeen": "2026-04-18T23:36:05.907Z",
+      "lastActivity": "2026-04-23T19:49:00.580Z"
+    },
+    {
+      "id": "119529392861264@lid",
+      "msg": 18,
+      "cmd": 17,
+      "figu": 1,
+      "pushname": "Tay-Percs",
+      "firstSeen": "2026-04-21T12:09:14.442Z",
+      "lastActivity": "2026-04-23T20:34:45.687Z"
+    },
+    {
+      "id": "94631635235011@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Ailton🥰🥰",
+      "firstSeen": "2026-04-23T20:14:01.673Z",
+      "lastActivity": "2026-04-23T20:14:01.673Z"
+    }
+  ]
+}

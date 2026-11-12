@@ -1,0 +1,35 @@
+{
+  "mark": {},
+  "createdAt": "2026-08-11T05:20:43.331Z",
+  "groupName": "Bridgepay",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "264321598779532@lid",
+      "msg": 0,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "null",
+      "firstSeen": "2026-10-14T20:03:36.813Z",
+      "lastActivity": "2026-10-14T20:03:36.813Z"
+    },
+    {
+      "id": "159034049044504@lid",
+      "msg": 1,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-08-11T05:20:43.332Z",
+      "lastActivity": "2026-10-14T20:03:36.806Z"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "mark": {},
+  "createdAt": "2026-04-16T13:03:32.939Z",
+  "groupName": "Humor Negro",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "155225067397126@lid",
+      "msg": 57,
+      "cmd": 11,
+      "figu": 7,
+      "pushname": "JÚNI ZERA",
+      "firstSeen": "2026-04-16T13:03:32.943Z",
+      "lastActivity": "2026-04-21T14:34:15.614Z"
+    },
+    {
+      "id": "76313582940397@lid",
+      "msg": 124,
+      "cmd": 6,
+      "figu": 25,
+      "pushname": "shelton só q kurokawa🇯🇵🇲🇿",
+      "firstSeen": "2026-04-16T13:03:33.533Z",
+      "lastActivity": "2026-07-30T20:43:26.960Z"
+    },
+    {
+      "id": "58824593567880@lid",
+      "msg": 17,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Dylux bot",
+      "firstSeen": "2026-04-17T15:48:52.766Z",
+      "lastActivity": "2026-04-21T14:35:02.063Z"
+    },
+    {
+      "id": "77751792963637@lid",
+      "msg": 10,
+      "cmd": 2,
+      "figu": 3,
+      "pushname": "teu pai",
+      "firstSeen": "2026-04-17T16:12:17.170Z",
+      "lastActivity": "2026-07-31T19:07:44.036Z"
+    },
+    {
+      "id": "159034049044504@lid",
+      "msg": 20,
+      "cmd": 3,
+      "figu": 3,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-04-18T09:10:58.662Z",
+      "lastActivity": "2026-04-20T23:09:57.949Z"
+    },
+    {
+      "id": "181007839936625@lid",
+      "msg": 1,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "Eddy💜",
+      "firstSeen": "2026-04-18T22:32:48.619Z",
+      "lastActivity": "2026-04-18T22:33:16.870Z"
+    },
+    {
+      "id": "107237548798159@lid",
+      "msg": 19,
+      "cmd": 3,
+      "figu": 9,
+      "pushname": "JÚNI ZERA OFC",
+      "firstSeen": "2026-07-28T18:59:49.668Z",
+      "lastActivity": "2026-08-01T12:54:57.606Z"
+    },
+    {
+      "id": "29193580597313@lid",
+      "msg": 14,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "Senna Bot",
+      "firstSeen": "2026-07-28T19:00:03.964Z",
+      "lastActivity": "2026-08-01T14:19:03.734Z"
+    },
+    {
+      "id": "72813268480127@lid",
+      "msg": 11,
+      "cmd": 1,
+      "figu": 6,
+      "pushname": "STAMP",
+      "firstSeen": "2026-07-28T19:00:52.625Z",
+      "lastActivity": "2026-07-30T19:52:23.390Z"
+    },
+    {
+      "id": "103942721650943@lid",
+      "msg": 67,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Rick",
+      "firstSeen": "2026-07-28T19:47:10.605Z",
+      "lastActivity": "2026-07-30T20:43:09.403Z"
+    },
+    {
+      "id": "18443378151596@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Anthony_Ino",
+      "firstSeen": "2026-07-31T19:17:28.510Z",
+      "lastActivity": "2026-07-31T19:17:28.510Z"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "mark": {},
+  "createdAt": "2026-08-19T12:38:04.395Z",
+  "groupName": "ASSOCIAÇÃO DOS AGARRADOS PLUS!",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "152974286405665@lid",
+      "msg": 788,
+      "cmd": 85,
+      "figu": 120,
+      "pushname": "Franck_sz",
+      "firstSeen": "2026-08-19T12:38:04.396Z",
+      "lastActivity": "2026-10-31T18:37:47.666Z"
+    },
+    {
+      "id": "138646275551240@lid",
+      "msg": 115,
+      "cmd": 9,
+      "figu": 20,
+      "pushname": "Elson HxRx",
+      "firstSeen": "2026-08-19T12:59:55.384Z",
+      "lastActivity": "2026-08-29T14:53:30.246Z"
+    },
+    {
+      "id": "92273530376263@lid",
+      "msg": 30,
+      "cmd": 2,
+      "figu": 3,
+      "pushname": "!",
+      "firstSeen": "2026-08-19T15:44:02.734Z",
+      "lastActivity": "2026-08-22T07:28:04.523Z"
+    },
+    {
+      "id": "170661314068634@lid",
+      "msg": 540,
+      "cmd": 21,
+      "figu": 106,
+      "pushname": "...",
+      "firstSeen": "2026-08-19T18:29:11.839Z",
+      "lastActivity": "2026-10-31T04:21:47.637Z"
+    },
+    {
+      "id": "72688680874191@lid",
+      "msg": 314,
+      "cmd": 24,
+      "figu": 95,
+      "pushname": "Allau«",
+      "firstSeen": "2026-08-19T20:31:02.922Z",
+      "lastActivity": "2026-11-01T10:39:24.967Z"
+    },
+    {
+      "id": "127569605189716@lid",
+      "msg": 107,
+      "cmd": 10,
+      "figu": 18,
+      "pushname": "☠️Hunax_Júnior☠️",
+      "firstSeen": "2026-08-20T18:18:23.009Z",
+      "lastActivity": "2026-10-11T20:28:41.472Z"
+    },
+    {
+      "id": "95550405869687@lid",
+      "msg": 44,
+      "cmd": 0,
+      "figu": 11,
+      "pushname": "Á D S R F...!!!",
+      "firstSeen": "2026-08-22T08:15:50.094Z",
+      "lastActivity": "2026-10-06T19:59:01.752Z"
+    },
+    {
+      "id": "30760924913759@lid",
+      "msg": 40,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Wilson",
+      "firstSeen": "2026-08-22T19:15:22.411Z",
+      "lastActivity": "2026-09-20T11:05:12.768Z"
+    },
+    {
+      "id": "221539244970132@lid",
+      "msg": 84,
+      "cmd": 21,
+      "figu": 14,
+      "pushname": "Elson HxRx",
+      "firstSeen": "2026-08-28T19:28:14.526Z",
+      "lastActivity": "2026-10-31T17:57:02.935Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Senna bot",
+      "firstSeen": "2026-08-29T12:24:45.716Z",
+      "lastActivity": "2026-10-16T19:13:38.472Z"
+    }
+  ],
+  "autodl": true
+}

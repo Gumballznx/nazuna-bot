@@ -1,0 +1,80 @@
+{
+  "mark": {},
+  "createdAt": "2026-09-06T18:44:35.865Z",
+  "groupName": "DOMINUS BOT",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "112687728050189@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Yǐng Chén (影辰)",
+      "firstSeen": "2026-09-06T18:44:35.868Z",
+      "lastActivity": "2026-09-06T18:46:07.224Z"
+    },
+    {
+      "id": "218344091308205@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "VJ.🪽",
+      "firstSeen": "2026-09-06T18:45:18.547Z",
+      "lastActivity": "2026-09-06T18:46:27.472Z"
+    },
+    {
+      "id": "194270715740198@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bäby Dëysë Bänzë❤💋",
+      "firstSeen": "2026-09-06T21:30:31.991Z",
+      "lastActivity": "2026-09-06T21:30:31.991Z"
+    },
+    {
+      "id": "224769194627307@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Lopes",
+      "firstSeen": "2026-09-06T22:45:36.367Z",
+      "lastActivity": "2026-09-06T22:45:36.367Z"
+    },
+    {
+      "id": "53378440781886@lid",
+      "msg": 6,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Pedro",
+      "firstSeen": "2026-09-06T23:38:51.330Z",
+      "lastActivity": "2026-09-06T23:45:24.615Z"
+    },
+    {
+      "id": "226207991881907@lid",
+      "msg": 6,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "ᴍᴀɴxᜢᜢ  𝙙𝙚𝙫 </>",
+      "firstSeen": "2026-09-06T23:40:11.961Z",
+      "lastActivity": "2026-09-06T23:44:17.657Z"
+    },
+    {
+      "id": "241777399328845@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Alexzin",
+      "firstSeen": "2026-09-06T23:43:16.840Z",
+      "lastActivity": "2026-09-06T23:43:16.840Z"
+    }
+  ]
+}

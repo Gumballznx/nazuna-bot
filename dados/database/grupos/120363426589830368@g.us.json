@@ -1,0 +1,109 @@
+{
+  "mark": {},
+  "createdAt": "2026-04-18T08:44:28.908Z",
+  "groupName": "Gumball-Saitama ᴮᴼᵀ ✨",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "159034049044504@lid",
+      "msg": 40,
+      "cmd": 6,
+      "figu": 1,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-04-18T08:44:45.905Z",
+      "lastActivity": "2026-05-01T16:02:55.670Z"
+    },
+    {
+      "id": "276184197787689@lid",
+      "msg": 17,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": ".Oppenheimer O'bruno⚰️",
+      "firstSeen": "2026-04-27T09:37:23.713Z",
+      "lastActivity": "2026-04-28T07:14:02.282Z"
+    },
+    {
+      "id": "103942721650943@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Rick",
+      "firstSeen": "2026-04-27T18:09:45.773Z",
+      "lastActivity": "2026-04-27T18:09:47.924Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 0,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "null",
+      "firstSeen": "2026-05-01T16:02:55.678Z",
+      "lastActivity": "2026-05-01T16:02:55.678Z"
+    },
+    {
+      "id": "227251752816816@lid",
+      "msg": 64,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "saitama bot",
+      "firstSeen": "2026-04-18T08:44:28.911Z",
+      "lastActivity": "2026-05-01T16:02:41.413Z"
+    },
+    {
+      "id": "89524415799307@lid",
+      "msg": 26,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "🚤",
+      "firstSeen": "2026-04-27T10:22:26.859Z",
+      "lastActivity": "2026-04-27T13:50:11.031Z"
+    },
+    {
+      "id": "227324649828439@lid",
+      "msg": 13,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Atlas",
+      "firstSeen": "2026-04-26T22:27:39.919Z",
+      "lastActivity": "2026-04-27T13:35:30.503Z"
+    },
+    {
+      "id": "155225067397126@lid",
+      "msg": 15,
+      "cmd": 0,
+      "figu": 6,
+      "pushname": "JÚNI ZERA",
+      "firstSeen": "2026-04-27T09:19:51.685Z",
+      "lastActivity": "2026-04-28T06:41:09.293Z"
+    },
+    {
+      "id": "9668575420431@lid",
+      "msg": 20,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "👺",
+      "firstSeen": "2026-04-28T06:50:33.559Z",
+      "lastActivity": "2026-04-28T06:52:01.880Z"
+    },
+    {
+      "id": "151544196517962@lid",
+      "msg": 8,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "愛𝖐𝖑𝖊𝖞𝖘𝖙𝖊𝖗.𝖝𝖕",
+      "firstSeen": "2026-04-27T09:21:30.074Z",
+      "lastActivity": "2026-04-27T09:46:05.820Z"
+    }
+  ],
+  "soadm": true,
+  "antistatus": true
+}

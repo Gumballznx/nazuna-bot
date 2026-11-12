@@ -1,0 +1,35 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-28T09:02:35.771Z",
+  "groupName": "💎AizRENDA EXTRA💎",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "65850841260178@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "davi",
+      "firstSeen": "2026-07-28T09:02:35.773Z",
+      "lastActivity": "2026-07-28T09:04:20.264Z"
+    },
+    {
+      "id": "47115841617961@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Philly",
+      "firstSeen": "2026-07-28T09:03:23.962Z",
+      "lastActivity": "2026-07-28T09:03:23.962Z"
+    }
+  ]
+}

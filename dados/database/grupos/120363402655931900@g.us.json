@@ -1,0 +1,71 @@
+{
+  "mark": {},
+  "createdAt": "2026-04-16T10:11:42.245Z",
+  "groupName": "ROBÔ CYBER HACKER ✈️ #4",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "181286912135278@lid",
+      "msg": 9,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Cyber Hacker Office",
+      "firstSeen": "2026-04-16T10:11:42.252Z",
+      "lastActivity": "2026-04-16T16:35:23.568Z"
+    },
+    {
+      "id": "82463707652312@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Estressado",
+      "firstSeen": "2026-04-16T11:46:48.773Z",
+      "lastActivity": "2026-04-16T11:46:48.773Z"
+    },
+    {
+      "id": "203865169355001@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "luterolina",
+      "firstSeen": "2026-04-16T13:11:52.453Z",
+      "lastActivity": "2026-04-16T13:11:52.453Z"
+    },
+    {
+      "id": "244989900677279@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Cyber Hacker Office",
+      "firstSeen": "2026-04-16T16:18:48.202Z",
+      "lastActivity": "2026-04-17T08:38:43.442Z"
+    },
+    {
+      "id": "33419761295555@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Alithyzzy842464",
+      "firstSeen": "2026-04-16T16:38:39.088Z",
+      "lastActivity": "2026-04-16T16:38:39.088Z"
+    },
+    {
+      "id": "183361280733353@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Almeida",
+      "firstSeen": "2026-04-17T11:55:32.336Z",
+      "lastActivity": "2026-04-17T11:55:32.336Z"
+    }
+  ]
+}

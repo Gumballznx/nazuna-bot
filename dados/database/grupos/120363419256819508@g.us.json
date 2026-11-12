@@ -1,0 +1,26 @@
+{
+  "mark": {},
+  "createdAt": "2026-08-03T09:30:27.436Z",
+  "groupName": "Elite CF @eugabrieltomas",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "264321598779532@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Senna bot",
+      "firstSeen": "2026-08-03T09:30:27.440Z",
+      "lastActivity": "2026-08-03T09:30:27.440Z"
+    }
+  ]
+}

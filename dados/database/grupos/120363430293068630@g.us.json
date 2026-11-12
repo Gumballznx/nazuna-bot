@@ -1,0 +1,63 @@
+{
+  "mark": {},
+  "createdAt": "2026-10-17T08:15:48.459Z",
+  "groupName": "BOT DO GAMBO",
+  "modorpg": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "159034049044504@lid",
+      "msg": 208,
+      "cmd": 34,
+      "figu": 56,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-10-17T08:15:48.459Z",
+      "lastActivity": "2026-10-28T09:55:28.750Z"
+    },
+    {
+      "id": "103942721650943@lid",
+      "msg": 142,
+      "cmd": 5,
+      "figu": 40,
+      "pushname": "Rick",
+      "firstSeen": "2026-10-17T08:16:45.528Z",
+      "lastActivity": "2026-10-31T18:12:58.438Z"
+    },
+    {
+      "id": "147421111779378@lid",
+      "msg": 299,
+      "cmd": 158,
+      "figu": 70,
+      "pushname": "Malik",
+      "firstSeen": "2026-10-17T08:20:10.953Z",
+      "lastActivity": "2026-10-31T19:34:16.470Z"
+    },
+    {
+      "id": "74917567574258@lid",
+      "msg": 211,
+      "cmd": 87,
+      "figu": 49,
+      "pushname": "Cris",
+      "firstSeen": "2026-10-17T09:01:33.408Z",
+      "lastActivity": "2026-10-31T19:33:30.872Z"
+    },
+    {
+      "id": "189258488885496@lid",
+      "msg": 40,
+      "cmd": 83,
+      "figu": 5,
+      "pushname": "MIC247🍃",
+      "firstSeen": "2026-10-27T18:04:36.703Z",
+      "lastActivity": "2026-11-01T04:38:25.038Z"
+    }
+  ],
+  "modobrincadeira": true
+}

@@ -1,0 +1,26 @@
+{
+  "mark": {},
+  "createdAt": "2026-08-22T02:27:45.505Z",
+  "groupName": "Bbb",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "73285278638226@lid",
+      "msg": 1,
+      "cmd": 2,
+      "figu": 0,
+      "pushname": "Jr",
+      "firstSeen": "2026-08-22T02:27:45.506Z",
+      "lastActivity": "2026-08-22T02:28:30.455Z"
+    }
+  ]
+}

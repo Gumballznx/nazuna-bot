@@ -1,0 +1,62 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-20T21:24:39.996Z",
+  "groupName": "Familia",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "73285278638226@lid",
+      "msg": 406,
+      "cmd": 18,
+      "figu": 48,
+      "pushname": "Jr",
+      "firstSeen": "2026-07-20T21:24:39.996Z",
+      "lastActivity": "2026-08-17T21:58:12.110Z"
+    },
+    {
+      "id": "121148813619244@lid",
+      "msg": 515,
+      "cmd": 10,
+      "figu": 54,
+      "pushname": "Wesley Manjate.",
+      "firstSeen": "2026-07-20T21:24:47.890Z",
+      "lastActivity": "2026-08-19T00:31:24.724Z"
+    },
+    {
+      "id": "58351559921879@lid",
+      "msg": 540,
+      "cmd": 9,
+      "figu": 14,
+      "pushname": "Kelvin Macauze",
+      "firstSeen": "2026-07-20T21:27:00.763Z",
+      "lastActivity": "2026-08-18T18:52:41.354Z"
+    },
+    {
+      "id": "229768033251508@lid",
+      "msg": 209,
+      "cmd": 0,
+      "figu": 20,
+      "pushname": "👀",
+      "firstSeen": "2026-07-20T21:56:52.928Z",
+      "lastActivity": "2026-08-17T10:08:15.600Z"
+    },
+    {
+      "id": "98930343809037@lid",
+      "msg": 131,
+      "cmd": 0,
+      "figu": 29,
+      "pushname": "José kavona",
+      "firstSeen": "2026-07-20T22:11:56.746Z",
+      "lastActivity": "2026-08-18T21:39:21.572Z"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "mark": {},
+  "createdAt": "2026-10-27T17:37:25.289Z",
+  "groupName": "Sla",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "113134438203429@lid",
+      "msg": 0,
+      "cmd": 4,
+      "figu": 0,
+      "pushname": "Aayan",
+      "firstSeen": "2026-10-27T17:37:25.290Z",
+      "lastActivity": "2026-10-30T19:31:14.418Z"
+    }
+  ]
+}

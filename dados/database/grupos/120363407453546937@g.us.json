@@ -1,0 +1,44 @@
+{
+  "mark": {},
+  "createdAt": "2026-05-04T20:24:56.516Z",
+  "groupName": "Bot Stckrs",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "123660765544580@lid",
+      "msg": 5,
+      "cmd": 4,
+      "figu": 0,
+      "pushname": "Jonasi",
+      "firstSeen": "2026-05-04T20:24:56.522Z",
+      "lastActivity": "2026-06-21T20:25:43.387Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Nazuna Bot",
+      "firstSeen": "2026-05-04T20:25:38.763Z",
+      "lastActivity": "2026-06-21T20:57:00.215Z"
+    },
+    {
+      "id": "177365321805931@lid",
+      "msg": 1,
+      "cmd": 2,
+      "figu": 0,
+      "pushname": "keyla",
+      "firstSeen": "2026-06-21T11:45:42.103Z",
+      "lastActivity": "2026-06-21T15:57:44.070Z"
+    }
+  ]
+}

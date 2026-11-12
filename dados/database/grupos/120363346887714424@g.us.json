@@ -1,0 +1,51 @@
+{
+  "mark": {},
+  "createdAt": "2026-06-23T09:08:54.067Z",
+  "groupName": "Grupo de vendas #1",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "159034049044504@lid",
+      "msg": 72,
+      "cmd": 16,
+      "figu": 4,
+      "pushname": "🇯🇵𝙶𝙷𝙾𝚂𝚃 𝙶𝚄𝙼𝙱𝙰𝙻𝙻 ╰⁔╯",
+      "firstSeen": "2026-06-23T15:11:33.299Z",
+      "lastActivity": "2026-10-11T13:01:47.329Z"
+    },
+    {
+      "id": "55629070745660@lid",
+      "msg": 37,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "D",
+      "firstSeen": "2026-06-25T08:19:00.949Z",
+      "lastActivity": "2026-10-11T13:01:21.565Z"
+    },
+    {
+      "id": "264321598779532@lid",
+      "msg": 0,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "null",
+      "firstSeen": "2026-10-11T13:01:36.534Z",
+      "lastActivity": "2026-10-11T13:01:36.534Z"
+    }
+  ],
+  "antilinkgp": true,
+  "antilinksoft": true,
+  "antistatus": true,
+  "bemvindo": true,
+  "welcome": {
+    "image": "banner"
+  }
+}

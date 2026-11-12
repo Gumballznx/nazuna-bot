@@ -1,0 +1,44 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-20T09:38:45.082Z",
+  "groupName": "EMTPM Formação 2026",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "207765301682208@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Júnior",
+      "firstSeen": "2026-07-20T09:38:45.083Z",
+      "lastActivity": "2026-07-20T09:39:24.488Z"
+    },
+    {
+      "id": "248236610715704@lid",
+      "msg": 1,
+      "cmd": 32,
+      "figu": 0,
+      "pushname": "I luv Barça and Messi 😍",
+      "firstSeen": "2026-07-20T09:38:45.086Z",
+      "lastActivity": "2026-07-20T09:42:57.252Z"
+    },
+    {
+      "id": "206712783015986@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "😇😣",
+      "firstSeen": "2026-07-20T09:39:01.159Z",
+      "lastActivity": "2026-07-20T09:40:38.546Z"
+    }
+  ]
+}

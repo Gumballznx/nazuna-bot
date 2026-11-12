@@ -1,0 +1,35 @@
+{
+  "mark": {},
+  "createdAt": "2026-07-20T22:03:10.060Z",
+  "groupName": ".",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "mutedUsers2": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "contador": [
+    {
+      "id": "121148813619244@lid",
+      "msg": 11,
+      "cmd": 1,
+      "figu": 3,
+      "pushname": "Wesley Manjate.",
+      "firstSeen": "2026-07-20T22:03:10.061Z",
+      "lastActivity": "2026-07-20T22:06:35.641Z"
+    },
+    {
+      "id": "8384011104480@lid",
+      "msg": 8,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Anny",
+      "firstSeen": "2026-07-20T22:03:51.063Z",
+      "lastActivity": "2026-07-20T22:06:39.318Z"
+    }
+  ]
+}
