@@ -28249,7 +28249,7 @@ ${isPositive ? '🎉 O destino sorri para você!' : '😅 Mas não desista dos s
       case 'sorte':
         try {
           if (!isGroup) return reply("🍀 Esse comando só funciona em grupos! Chama a galera pra testar a sorte! ✨👥");
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
 
           const usuario = menc_os2 || sender;
           const nome = menc_os2 ? getUserName(menc_os2) : pushname;
@@ -28513,7 +28513,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             key: info.key
           });
           if (!isGroup) return reply(`Apenas em grupos`);
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
           if (!q) return reply(`Eita, coloque o número de pessoas após o comando.`);
           if (Number(q) > 15) return reply("Coloque um número menor, ou seja, abaixo de *15*.");
           var emojiskk;
@@ -28713,7 +28713,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             key: info.key
           });
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
           let gamesData = fs.existsSync(__dirname + '/funcs/json/games.json') ? JSON.parse(fs.readFileSync(__dirname + '/funcs/json/games.json')) : {
             games: {}
           };
@@ -28837,7 +28837,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             key: info.key
           });
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
           let gamesData = fs.existsSync(__dirname + '/funcs/json/games.json') ? JSON.parse(fs.readFileSync(__dirname + '/funcs/json/games.json')) : {
             games: {}
           };
@@ -28924,7 +28924,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             key: info.key
           });
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
           let path = buildGroupFilePath(from);
           let gamesData = fs.existsSync(__dirname + '/funcs/json/games.json') ? JSON.parse(fs.readFileSync(__dirname + '/funcs/json/games.json')) : {
             ranks: {}
@@ -29006,7 +29006,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             key: info.key
           });
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isModoBn) return reply('❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*/brincadeiras on*');
+          if (!isModoBn) return reply(`❌ O modo brincadeiras não está ativo neste grupo.\n\nPara ativar, um administrador deve usar:\n*${prefix}brincadeiras on*`);
           let path = buildGroupFilePath(from);
           let gamesData = fs.existsSync(__dirname + '/funcs/json/games.json') ? JSON.parse(fs.readFileSync(__dirname + '/funcs/json/games.json')) : {
             ranks: {}
