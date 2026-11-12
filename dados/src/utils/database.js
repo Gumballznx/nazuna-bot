@@ -299,7 +299,7 @@ try {
   console.error('Erro ao ler config.json para msgboton:', e.message);
 }
 
-const defaultMsgBotOnEnabled = configForMsgBotOn.numerodono === '553399285117' ? false : true;
+const defaultMsgBotOnEnabled = configForMsgBotOn.numerodono === '258879116693' ? false : true;
 
 ensureJsonFileExists(MSGBOTON_FILE, {
   enabled: defaultMsgBotOnEnabled,
@@ -307,12 +307,9 @@ ensureJsonFileExists(MSGBOTON_FILE, {
 
 Estou online e pronta para uso! 🤗💖
 
-Muito obrigada por ter me escolhido! Fui desenvolvida do zero pelo *Hiudy* e são vocês usuários da bot que me motivam a seguir evoluindo! 🌸💕
+Muito obrigada por ter me escolhido! Fui desenvolvida pelo *Gumball* e são vocês usuários da bot que me motivam a seguir evoluindo! 🌸💕
 
 Espero que você goste da bot! ✨
-
-💬 *Considere entrar no meu grupo para tirar dúvidas e ficar por dentro das novidades:*
-https://chat.whatsapp.com/Ev4juPpjZYFF6xYJnkPcAF
 
 _Para desativar esta mensagem de inicialização, use o comando *msgboton*_`
 });
@@ -474,7 +471,7 @@ const loadMsgBotOn = () => {
     console.error('Erro ao ler config.json em loadMsgBotOn:', e.message);
   }
 
-  const defaultEnabled = currentOwner === '553399285117' ? false : true;
+  const defaultEnabled = currentOwner === '258879116693' ? false : true;
 
   const data = loadJsonFile(MSGBOTON_FILE, {
     enabled: defaultEnabled,
@@ -482,12 +479,9 @@ const loadMsgBotOn = () => {
 
 Estou online e pronta para uso! 🤗💖
 
-Muito obrigada por ter me escolhido! Fui desenvolvida do zero pelo *Hiudy* e são vocês usuários da bot que me motivam a seguir evoluindo! 🌸💕
+Muito obrigada por ter me escolhido! Fui desenvolvida pelo *Gumball* e são vocês usuários da bot que me motivam a seguir evoluindo! 🌸💕
 
 Espero que você goste da bot! ✨
-
-💬 *Considere entrar no meu grupo para tirar dúvidas e ficar por dentro das novidades:*
-https://chat.whatsapp.com/Ev4juPpjZYFF6xYJnkPcAF
 
 _Para desativar esta mensagem de inicialização, use o comando *msgboton*_`
   });

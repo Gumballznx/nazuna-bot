@@ -32,7 +32,7 @@ const print = {
     header: () => {
         print.separator();
         console.log(`${colors.bold}🚀 Configurador Gênesis Nazuna - Versão ${version}${colors.reset}`);
-        console.log(`${colors.bold}👨‍💻 Criado por Hiudy${colors.reset}`);
+        console.log(`${colors.bold}👨‍💻 Criado por Gumball${colors.reset}`);
         print.separator(); console.log();
     }
 };

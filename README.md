@@ -1,6 +1,6 @@
 # 🤖 nazuna Bot: Seu Assistente Completo para WhatsApp
 
-![nazuna Bot Banner](https://raw.githubusercontent.com/hiudyy/nazuna/main/dados/midias/menu.jpg)
+![nazuna Bot Banner](https://raw.githubusercontent.com/Gumballznx/nazuna-bot/main/dados/midias/menu.jpg)
 
 Bem-vindo ao repositório oficial do **nazuna Bot**! Este projeto é um bot avançado e multifuncional para WhatsApp, desenvolvido com a robustez do **Node.js** e a flexibilidade da biblioteca **WaLib**. Criado para otimizar sua comunicação e gestão de grupos, o nazuna Bot oferece uma vasta gama de comandos, desde funcionalidades administrativas essenciais até opções de entretenimento interativas. É a solução perfeita tanto para desenvolvedores iniciantes que buscam uma ferramenta fácil de usar quanto para usuários avançados que desejam uma plataforma altamente personalizável.
 
@@ -35,17 +35,17 @@ Acompanhe o progresso e a vitalidade do nazuna Bot através de métricas em temp
 
 | Ícone | Badge | Descrição Detalhada |
 |-------|-------|---------------------|
-| 🕒 | ![Última Atualização](https://img.shields.io/github/last-commit/hiudyy/nazuna?color=blue&style=flat-square) | **Última Atualização**: Indica a data do último commit realizado no repositório, mostrando a atividade recente de desenvolvimento. |
-| ⭐ | ![Estrelas](https://img.shields.io/github/stars/hiudyy/nazuna?color=yellow&label=Favoritos&style=flat-square) | **Favoritos (Estrelas)**: Representa o número de estrelas concedidas ao projeto no GitHub, um indicador direto da popularidade e do apreço da comunidade. |
-| 🍴 | ![Forks](https://img.shields.io/github/forks/hiudyy/nazuna?color=green&style=flat-square) | **Forks**: Contagem de cópias do projeto (forks) criadas por outros desenvolvedores, evidenciando o interesse em colaborar ou adaptar o bot. |
-| 🐞 | ![Issues](https://img.shields.io/github/issues/hiudyy/nazuna?color=red&style=flat-square) | **Issues**: Número de problemas reportados, sugestões de melhoria ou dúvidas levantadas pela comunidade, essenciais para o aprimoramento do bot. |
-| 📝 | ![Commits](https://img.shields.io/github/commit-activity/m/hiudyy/nazuna?color=purple&style=flat-square) | **Commits**: Frequência de atualizações no código-fonte, refletindo a intensidade do trabalho de desenvolvimento e manutenção. |
-| 💾 | ![Tamanho do Repo](https://img.shields.io/github/repo-size/hiudyy/nazuna?color=orange&style=flat-square) | **Tamanho do Repositório**: O espaço total ocupado pelo projeto no GitHub, incluindo todos os arquivos e histórico de versões. |
-| 👥 | ![Contribuidores](https://img.shields.io/github/contributors/hiudyy/nazuna?color=cyan&style=flat-square) | **Contribuidores**: Lista de todas as pessoas que contribuíram ativamente com código ou documentação para o projeto. |
-| 📥 | ![Downloads](https://img.shields.io/github/downloads/hiudyy/nazuna/total?color=pink&style=flat-square) | **Downloads**: O número total de vezes que o projeto foi baixado, indicando sua adoção e uso. |
-| 🌐 | ![Linguagens](https://img.shields.io/github/languages/top/hiudyy/nazuna?color=teal&style=flat-square) | **Linguagens**: As principais linguagens de programação utilizadas no desenvolvimento do nazuna Bot, com destaque para a mais predominante. |
-| 🔄 | ![PRs](https://img.shields.io/github/issues-pr/hiudyy/nazuna?color=brightgreen&style=flat-square) | **Pull Requests**: Propostas de melhorias ou novas funcionalidades enviadas por colaboradores, aguardando revisão e integração. |
-| ⏱️ | ![Tempo de Resposta](https://img.shields.io/github/issues-closed-raw/hiudyy/nazuna?color=blueviolet&style=flat-square) | **Tempo de Resposta (Issues)**: Média de tempo que leva para uma issue ser resolvida e fechada, demonstrando a agilidade da equipe. |
+| 🕒 | ![Última Atualização](https://img.shields.io/github/last-commit/Gumballznx/nazuna-bot?color=blue&style=flat-square) | **Última Atualização**: Indica a data do último commit realizado no repositório, mostrando a atividade recente de desenvolvimento. |
+| ⭐ | ![Estrelas](https://img.shields.io/github/stars/Gumballznx/nazuna-bot?color=yellow&label=Favoritos&style=flat-square) | **Favoritos (Estrelas)**: Representa o número de estrelas concedidas ao projeto no GitHub, um indicador direto da popularidade e do apreço da comunidade. |
+| 🍴 | ![Forks](https://img.shields.io/github/forks/Gumballznx/nazuna-bot?color=green&style=flat-square) | **Forks**: Contagem de cópias do projeto (forks) criadas por outros desenvolvedores, evidenciando o interesse em colaborar ou adaptar o bot. |
+| 🐞 | ![Issues](https://img.shields.io/github/issues/Gumballznx/nazuna-bot?color=red&style=flat-square) | **Issues**: Número de problemas reportados, sugestões de melhoria ou dúvidas levantadas pela comunidade, essenciais para o aprimoramento do bot. |
+| 📝 | ![Commits](https://img.shields.io/github/commit-activity/m/Gumballznx/nazuna-bot?color=purple&style=flat-square) | **Commits**: Frequência de atualizações no código-fonte, refletindo a intensidade do trabalho de desenvolvimento e manutenção. |
+| 💾 | ![Tamanho do Repo](https://img.shields.io/github/repo-size/Gumballznx/nazuna-bot?color=orange&style=flat-square) | **Tamanho do Repositório**: O espaço total ocupado pelo projeto no GitHub, incluindo todos os arquivos e histórico de versões. |
+| 👥 | ![Contribuidores](https://img.shields.io/github/contributors/Gumballznx/nazuna-bot?color=cyan&style=flat-square) | **Contribuidores**: Lista de todas as pessoas que contribuíram ativamente com código ou documentação para o projeto. |
+| 📥 | ![Downloads](https://img.shields.io/github/downloads/Gumballznx/nazuna-bot/total?color=pink&style=flat-square) | **Downloads**: O número total de vezes que o projeto foi baixado, indicando sua adoção e uso. |
+| 🌐 | ![Linguagens](https://img.shields.io/github/languages/top/Gumballznx/nazuna-bot?color=teal&style=flat-square) | **Linguagens**: As principais linguagens de programação utilizadas no desenvolvimento do nazuna Bot, com destaque para a mais predominante. |
+| 🔄 | ![PRs](https://img.shields.io/github/issues-pr/Gumballznx/nazuna-bot?color=brightgreen&style=flat-square) | **Pull Requests**: Propostas de melhorias ou novas funcionalidades enviadas por colaboradores, aguardando revisão e integração. |
+| ⏱️ | ![Tempo de Resposta](https://img.shields.io/github/issues-closed-raw/Gumballznx/nazuna-bot?color=blueviolet&style=flat-square) | **Tempo de Resposta (Issues)**: Média de tempo que leva para uma issue ser resolvida e fechada, demonstrando a agilidade da equipe. |
 | 📜 | ![Licença](https://img.shields.io/badge/licença-Copyright-red?style=flat-square) | **Licença**: Informa que o projeto é protegido por copyright, com as condições de uso e distribuição detalhadas na seção de Licença. |
 | ✅ | ![Status](https://img.shields.io/badge/STATUS-ATIVO-success?style=flat-square) | **Status**: Indica que o projeto está ativo e em constante desenvolvimento, com suporte e atualizações regulares. |
 
@@ -90,7 +90,7 @@ Navegue facilmente por todas as seções deste README para encontrar as informa�
 8. [❓ Resolvendo Problemas Comuns (FAQ)](#-resolvendo-problemas-comuns-faq)
 9. [💖 Apoie o Projeto: Faça a Diferença](#-apoie-o-projeto-faça-a-diferença)
 10. [📜 Licença de Uso e Direitos Autorais](#-licença-de-uso-e-direitos-autorais)
-11. [👤 Sobre o Criador: Hiudy](#-sobre-o-criador-hiudy)
+11. [👤 Sobre o Criador: Gumball](#-sobre-o-criador-gumball)
 12. [❔ FAQ Avançado e Dúvidas Frequentes](#-faq-avançado-e-dúvidas-frequentes)
 </details>
 
@@ -146,12 +146,12 @@ Siga este guia passo a passo para instalar o nazuna Bot em seu sistema. Certifiq
 1. **Clonar o Repositório do GitHub**  
    Abra o terminal de sua preferência (Prompt de Comando no Windows, PowerShell, Terminal no Linux/macOS ou Termux no Android) e execute os seguintes comandos. Estes comandos baixarão todo o código-fonte do nazuna Bot para o seu computador e o levarão para o diretório do projeto:
    ```bash
-   git clone https://github.com/hiudyy/nazuna.git
-   cd nazuna
+   git clone https://github.com/Gumballznx/nazuna-bot.git
+   cd nazuna-bot
    ```
    - **Explicação**:  
-     - `git clone https://github.com/hiudyy/nazuna.git`: Este comando baixa uma cópia completa do repositório do nazuna Bot do GitHub para o seu diretório atual. Uma nova pasta chamada `nazuna` será criada.
-     - `cd nazuna`: Este comando muda o diretório de trabalho atual para a pasta `nazuna`, onde o bot está localizado. Todas as operações subsequentes devem ser executadas dentro desta pasta.
+     - `git clone https://github.com/Gumballznx/nazuna-bot.git`: Este comando baixa uma cópia completa do repositório do nazuna Bot do GitHub para o seu diretório atual. Uma nova pasta chamada `nazuna-bot` será criada.
+     - `cd nazuna-bot`: Este comando muda o diretório de trabalho atual para a pasta `nazuna-bot`, onde o bot está localizado. Todas as operações subsequentes devem ser executadas dentro desta pasta.
 
 2. **Instalar Dependências do Projeto**  
    O nazuna Bot utiliza diversas bibliotecas e pacotes Node.js para funcionar. Para instalá-los, execute os comandos abaixo, um por vez. O processo pode levar alguns minutos, dependendo da sua conexão com a internet:
@@ -276,8 +276,8 @@ Este guia detalha a instalação do nazuna Bot em sistemas operacionais Windows,
 2. **Clonar o Repositório e Instalar Dependências**  
    Abra o Prompt de Comando ou PowerShell e execute os comandos abaixo. Eles irão clonar o repositório do nazuna Bot e instalar todas as dependências necessárias:
    ```bash
-   git clone https://github.com/hiudyy/nazuna.git
-   cd nazuna
+   git clone https://github.com/Gumballznx/nazuna-bot.git
+   cd nazuna-bot
    npm run config
    npm run config:install
    ```
@@ -325,8 +325,8 @@ Este guia abrange a instalação do nazuna Bot em distribuições Linux baseadas
 2. **Clonar o Repositório e Instalar Dependências**  
    No terminal, execute os seguintes comandos para clonar o repositório do nazuna Bot e instalar suas dependências:
    ```bash
-   git clone https://github.com/hiudyy/nazuna.git
-   cd nazuna
+   git clone https://github.com/Gumballznx/nazuna-bot.git
+   cd nazuna-bot
    npm run config
    npm run config:install
    ```
@@ -395,13 +395,13 @@ Este tutorial abrangente detalha a instalação do nazuna Bot no Termux, desde o
    Navegue até a pasta de armazenamento interno (onde o Termux tem permissão de escrita) e clone o repositório do nazuna Bot. Isso garante que os arquivos do bot sejam acessíveis e não sejam perdidos.
    ```bash
    cd ~/storage/shared
-   git clone https://github.com/hiudyy/nazuna.git
-   cd nazuna
+   git clone https://github.com/Gumballznx/nazuna-bot.git
+   cd nazuna-bot
    ```
    - **Explicação**:  
      - `cd ~/storage/shared`: Muda o diretório atual para a pasta `shared` dentro do armazenamento do Termux, que geralmente mapeia para o armazenamento interno do seu dispositivo Android. É o local ideal para clonar projetos, evitando problemas de permissão.
-     - `git clone https://github.com/hiudyy/nazuna.git`: Baixa todo o código-fonte do nazuna Bot para uma nova pasta chamada `nazuna`.
-     - `cd nazuna`: Entra na pasta recém-criada do bot, onde todos os comandos subsequentes devem ser executados.
+     - `git clone https://github.com/Gumballznx/nazuna-bot.git`: Baixa todo o código-fonte do nazuna Bot para uma nova pasta chamada `nazuna-bot`.
+     - `cd nazuna-bot`: Entra na pasta recém-criada do bot, onde todos os comandos subsequentes devem ser executados.
 
 5. **Instalar as Dependências do Bot**  
    O nazuna Bot depende de várias bibliotecas Node.js para funcionar. O comando `npm run config:install` irá instalá-las de forma otimizada.
@@ -445,7 +445,7 @@ Este guia detalha como configurar o **nazuna Bot** em um servidor Pterodactyl, o
 Esta é a maneira mais fácil e rápida de colocar o nazuna Bot para rodar em um servidor Pterodactyl.
 
 1. **Baixar e Importar o Egg**  
-   - **Download**: Obtenha o arquivo JSON do Egg oficial do nazuna em: [https://gitlab.com/hiudyy/nazuna-funcs/nazuna-egg.json](https://gitlab.com/hiudyy/nazuna-funcs/-/raw/main/nazuna-egg.json).
+   - **Download**: O Egg oficial ainda não está disponível neste repositório. Enquanto isso, use a **Opção 2** (Egg Node.js comum) apontando para `https://github.com/Gumballznx/nazuna-bot.git`.
    - **Importação**: No painel de administração do Pterodactyl, navegue até **Nests** > **Eggs** e clique em **Import Egg**. Selecione o arquivo JSON baixado para importar o Egg do nazuna.
 
 2. **Criar o Servidor com o Egg do nazuna**  
@@ -460,7 +460,7 @@ Esta é a maneira mais fácil e rápida de colocar o nazuna Bot para rodar em um
 
 3. **Iniciar o Servidor e Conectar ao WhatsApp**  
    - Clique em **Start** no painel do Pterodactyl.
-   - O Egg irá clonar automaticamente o repositório (`https://github.com/hiudyy/nazuna.git`) e instalar todas as dependências.
+   - O Egg irá clonar automaticamente o repositório (`https://github.com/Gumballznx/nazuna-bot.git`) e instalar todas as dependências.
    - Utilize o console do Pterodactyl ou o VNC (se disponível) para visualizar o QR code ou obter o código de pareamento e conectar o bot ao WhatsApp.
 
 4. **Manutenção e Atualizações**  
@@ -482,8 +482,8 @@ Esta opção oferece mais controle sobre a configuração, mas requer mais passo
 2. **Clonar o Repositório Manualmente**  
    - Acesse o console do Pterodactyl e execute os seguintes comandos para clonar o repositório do nazuna Bot:
      ```bash
-     git clone https://github.com/hiudyy/nazuna.git
-     cd nazuna
+     git clone https://github.com/Gumballznx/nazuna-bot.git
+     cd nazuna-bot
      ```
 
 3. **Instalar as Dependências**  
@@ -567,36 +567,22 @@ Para aqueles que desejam rodar o nazuna Bot 24/7 em um ambiente estável e com b
 <details>
 <summary><strong>⚖️ Termos de uso e direitos</strong></summary>
 
-© 2025 **Hiudy**. Todos os direitos reservados.
+© 2025 **Gumball**. Todos os direitos reservados.
 
 O **nazuna Bot** é um projeto de código aberto, mas é **protegido por copyright**. Isso significa que, embora você tenha total liberdade para editar e distribuir o bot para uso pessoal ou em sua comunidade, a **venda** do nazuna Bot ou de suas versões modificadas é estritamente proibida, pois o projeto é oferecido gratuitamente. Além disso, a remoção total dos créditos do autor é vedada. Violações destas condições podem resultar em ações legais.
 </details>
 
 ---
 
-## 👤 Sobre o Criador: Hiudy
+## 👤 Sobre o Criador: Gumball
 
 <details>
 <summary><strong>👨‍💻 Conheça o desenvolvedor</strong></summary>
 
-Feito com ❤️ e muitas xícaras de café por [**Hiudy**](https://github.com/hiudyy), um desenvolvedor apaixonado por criar ferramentas que tornam a tecnologia mais divertida, acessível e poderosa. Ele está constantemente inovando e dedicando seu tempo ao nazuna Bot para aprimorar a experiência de toda a comunidade.
+Mantido por [**Gumball**](https://github.com/Gumballznx).
 
-**Estatísticas do Hiudy no GitHub**:
-
-| Ícone | Badge | Descrição |
-|-------|-------|-----------|
-| 👥 | ![Seguidores](https://img.shields.io/github/followers/hiudyy?color=blue&style=flat-square) | **Seguidores**: O número de pessoas que acompanham o trabalho do Hiudy no GitHub. |
-| 📝 | ![Contribuições](https://img.shields.io/github/commit-activity/y/hiudyy/nazuna) | **Contribuições**: A atividade anual de commits do Hiudy em todos os seus projetos. |
-| 💬 | ![Discord](https://img.shields.io/badge/Discord-hiudyyy-7289DA?style=flat-square&logo=discord) | **Discord**: Conecte-se diretamente com o Hiudy no Discord para trocar ideias e obter suporte. |
-| 📷 | ![Instagram](https://img.shields.io/badge/Instagram-hiudyyy_-E4405F?style=flat-square&logo=instagram) | **Instagram**: Siga o Hiudy no Instagram para ficar por dentro das últimas novidades e bastidores dos projetos. |
-
-**Bio**:  
-Hiudy é um entusiasta de tecnologia que se dedica a criar soluções práticas, inovadoras e com um toque de diversão. Além do nazuna Bot, ele contribui ativamente para diversos projetos open-source e valoriza a interação e o feedback da comunidade. Conecte-se com ele nas redes sociais para acompanhar seus próximos projetos e aventuras no mundo da programação!
-
-- 📍 **GitHub**: [hiudyy](https://github.com/hiudyy)
-- 💬 **Discord**: [hiudyyy](https://discord.com/users/hiudyyy)
-- 📷 **Instagram**: [hiudyyy_](https://instagram.com/hiudyyy_)
-- 📱 **WhatsApp**: [wa.me/hiudy](https://wa.me/hiudy)
+- 📍 **GitHub**: [Gumballznx](https://github.com/Gumballznx)
+- 📱 **WhatsApp**: [wa.me/258879116693](https://wa.me/258879116693)
 
 > 🌟 **Gostou do Projeto?** Demonstre seu apoio dando uma estrela no GitHub e compartilhando o nazuna Bot com seus amigos e comunidades!
 </details>
@@ -667,11 +653,11 @@ Para desenvolvedores que desejam fazer modificações avançadas no nazuna Bot, 
 ### 1. **Configuração do Ambiente de Desenvolvimento**
    ```bash
    # Clone o repositório
-   git clone https://github.com/hiudyy/nazuna.git
-   cd nazuna
+   git clone https://github.com/Gumballznx/nazuna-bot.git
+   cd nazuna-bot
    
    # Adicione o repositório original como remote
-   git remote add upstream https://github.com/hiudyy/nazuna.git
+   git remote add upstream https://github.com/Gumballznx/nazuna-bot.git
    ```
 
 2. **Configure o Ambiente de Desenvolvimento**
