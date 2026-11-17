@@ -7,7 +7,62 @@ import util from 'util';
 const execPromise = util.promisify(exec);
 import { pipeline } from 'stream/promises';
 import { downloadYT, getYTInfo, resolverUrlYT, getCobaltApis } from './ytHelper.js';
-import { ytResolveSized } from './savetube.js';
+import { ytResolveSized, ytResolveBest } from './savetube.js';
+
+const VIDEO_LIMIT = 60 * 1024 * 1024; // até aqui vai como vídeo; acima, documento (qualidade máxima)
+
+const H264_GROWTH = 1.8; // converter AV1/VP9 para h264 (veryfast) deixa ~1,8x maior
+
+async function codecDoVideo(filePath) {
+    try {
+        const { stdout } = await execPromise(`ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "${filePath}"`);
+        return stdout.trim().toLowerCase();
+    } catch { return ''; }
+}
+
+/**
+ * Decide como mandar um vídeo, sempre na melhor qualidade:
+ *  - h264 até 60 MB → vídeo
+ *  - outro codec que, convertido, ainda caiba em 60 MB → converte e manda como vídeo
+ *  - o resto → arquivo ORIGINAL como documento (sem converter)
+ * Retorna { path, asDocument }.
+ */
+async function prepararVideo(filePath) {
+    const size = fs.statSync(filePath).size;
+    const codec = await codecDoVideo(filePath);
+    if (/h264|avc/.test(codec) || !codec) {
+        if (size <= VIDEO_LIMIT) return { path: await verificarEConverterCodec(filePath), asDocument: false };
+        return { path: filePath, asDocument: true };
+    }
+    if (size * H264_GROWTH <= VIDEO_LIMIT) {
+        // verificarEConverterCodec apaga o original quando converte; usa o convertido em qualquer caso
+        const conv = await verificarEConverterCodec(filePath);
+        let cs = 0;
+        try { cs = fs.statSync(conv).size; } catch {}
+        return { path: conv, asDocument: cs > VIDEO_LIMIT };
+    }
+    return { path: filePath, asDocument: true };
+}
+
+// Envia vídeo do disco na melhor qualidade (vídeo até 60 MB; acima, documento original)
+async function enviarVideoInteligente(nazu, from, m, filePath, caption, fileName = 'video.mp4') {
+    const { path: p, asDocument } = await prepararVideo(filePath);
+    try {
+    const size = fs.statSync(p).size;
+    const cap = `${caption}${caption ? '\n' : ''}📦 ${(size / 1024 / 1024).toFixed(1)} MB`;
+    if (!asDocument) {
+        return await nazu.sendMessage(from, { video: { url: p }, mimetype: 'video/mp4', caption: cap }, { quoted: m });
+    }
+    return await nazu.sendMessage(from, {
+        document: { url: p }, mimetype: 'video/mp4',
+        fileName: /\.mp4$/i.test(fileName) ? fileName : `${fileName}.mp4`,
+        caption: `${cap}\n📁 Enviado como documento (qualidade máxima)`
+    }, { quoted: m });
+    } finally {
+        // apaga o arquivo convertido (o original é apagado por quem chamou)
+        if (p !== filePath) try { fs.unlinkSync(p); } catch {}
+    }
+}
 
 let _fg = null;
 async function getFg() {
@@ -212,7 +267,7 @@ async function baixarYoutube(url, formato = 'video') {
             }
         }
 
-        const dl = await downloadYT(url, formato);
+        const dl = await downloadYT(url, formato, resolved?.dl_url ? { url: resolved.dl_url, title: resolved.title } : null);
         if (dl && dl.filePath) {
             return { type: formato, url: dl.filePath, filePath: dl.filePath, desc: dl.title || 'YouTube', isFile: true };
         }
@@ -431,7 +486,7 @@ async function verificarEConverterCodec(filePath) {
 
             console.log(`[Codec Sniffer] Codec Incompatível (${codec}). Convertendo para H.264 (yuv420p)...`);
             const finalPath = filePath.replace('.mp4', '_ready.mp4');
-            await execPromise(`ffmpeg -y -i "${filePath}" -c:v libx264 -preset ultrafast -crf 26 -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:a aac -b:a 128k -movflags +faststart "${finalPath}"`);
+            await execPromise(`ffmpeg -y -i "${filePath}" -c:v libx264 -preset veryfast -crf 27 -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:a aac -b:a 128k -movflags +faststart "${finalPath}"`);
             try { fs.unlinkSync(filePath); } catch {}
             return finalPath;
         }
@@ -500,22 +555,24 @@ async function enviarMidia(nazu, from, m, resultado, plataforma) {
 
         if (finalFilePath) {
 
-            finalFilePath = await verificarEConverterCodec(finalFilePath);
+            // Acima de 60 MB vai como documento na qualidade máxima: não precisa (nem dá tempo de) converter
+            const prep = await prepararVideo(finalFilePath);
+            finalFilePath = prep.path;
 
             let stats = null;
             try { stats = fs.statSync(finalFilePath); } catch {}
-            const limit = 60 * 1024 * 1024;
-            const isBig = stats && stats.size > limit;
+            const isBig = prep.asDocument;
 
             const captionMsg = `✅ ${plataforma}${stats ? `\n📦 ${(stats.size / 1024 / 1024).toFixed(1)} MB` : ''}`;
 
             if (isBig) {
 
-                console.log(`[enviarMidia] Vídeo muito grande (${stats ? (stats.size / 1024 / 1024).toFixed(2) : '?'}MB > 60MB). Enviando como Documento.`);
+                console.log(`[enviarMidia] Vídeo muito grande (${stats ? (stats.size / 1024 / 1024).toFixed(2) : '?'}MB). Enviando como Documento (qualidade máxima).`);
                 await nazu.sendMessage(from, {
                     document: { url: finalFilePath },
                     mimetype: 'video/mp4',
-                    fileName: resultado.filename || path.basename(finalFilePath) || 'video.mp4'
+                    fileName: resultado.filename || path.basename(finalFilePath) || 'video.mp4',
+                    caption: `${captionMsg}\n📁 Enviado como documento (qualidade máxima)`
                 }, { quoted: m });
             } else {
 
@@ -733,11 +790,11 @@ export async function playAudio(nazu, from, m, q, reply) {
         const withTimeout = (p, ms) => Promise.race([p, new Promise(r => setTimeout(() => r(null), ms))]);
         const [preAudio, preVideo] = await Promise.all([
             withTimeout(ytResolveSized(video.url, 'audio').catch(() => null), 25000),
-            withTimeout(ytResolveSized(video.url, 'video').catch(() => null), 25000)
+            withTimeout(ytResolveBest(video.url, 'video').catch(() => null), 30000)
         ]);
         const mb = b => (b / (1024 * 1024)).toFixed(1);
         const audioSize = preAudio?.size ? `${mb(preAudio.size)} MB` : `~${(seconds * 0.016).toFixed(1)} MB`;
-        const videoSize = preVideo?.size ? `${mb(preVideo.size)} MB (${preVideo.quality}p)` : `~${(seconds * 0.1).toFixed(1)} MB`;
+        const videoSize = preVideo?.size ? `${mb(preVideo.size)} MB (${preVideo.quality}p)${preVideo.size > VIDEO_LIMIT ? ' 📁 documento' : ''}` : `~${(seconds * 0.1).toFixed(1)} MB`;
 
         if (m.key) await nazu.sendMessage(from, { react: { text: '🎧', key: m.key } }).catch(() => {});
 
@@ -828,12 +885,7 @@ export async function handlePlayConfirmation(nazu, from, m, text, senderJid) {
                 try { fs.unlinkSync(finalPath); } catch {}
             } else {
                 let finalPath = dl.filePath;
-                finalPath = await verificarEConverterCodec(finalPath);
-                await nazu.sendMessage(from, {
-                    video: { url: finalPath },
-                    mimetype: 'video/mp4',
-                    caption: `🎬 ${pending.title || 'YouTube'}\n📦 ${(fs.statSync(finalPath).size / (1024 * 1024)).toFixed(1)} MB`
-                }, { quoted: m });
+                await enviarVideoInteligente(nazu, from, m, finalPath, `🎬 ${pending.title || 'YouTube'}`, `${(pending.title || 'YouTube').replace(/[\\/:*?"<>|]/g, '')}.mp4`);
                 if (finalPath !== dl.filePath) {
                     try { fs.unlinkSync(finalPath); } catch {}
                 }
@@ -865,8 +917,7 @@ export async function baixarDireto(nazu, from, m, url, type = 'video') {
                 await nazu.sendMessage(from, { audio: { url: finalPath }, mimetype: 'audio/mpeg' }, { quoted: m });
                 try { fs.unlinkSync(finalPath); } catch {}
             } else {
-                finalPath = await verificarEConverterCodec(finalPath);
-                await nazu.sendMessage(from, { video: { url: finalPath }, mimetype: 'video/mp4' }, { quoted: m });
+                await enviarVideoInteligente(nazu, from, m, finalPath, `🎬 ${dl.title || 'YouTube'}`, `${(dl.title || 'YouTube').replace(/[\\/:*?"<>|]/g, '')}.mp4`);
                 if (finalPath !== dl.filePath) try { fs.unlinkSync(finalPath); } catch {}
             }
             try { if (fs.existsSync(dl.filePath)) fs.unlinkSync(dl.filePath); } catch {}

@@ -5,7 +5,7 @@ import { pipeline } from 'stream/promises';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { ytResolve, ytResolveSized } from './savetube.js';
+import { ytResolve, ytResolveSized, ytResolveBest } from './savetube.js';
 
 const execAsync = promisify(exec);
 
@@ -109,7 +109,7 @@ export async function resolverUrlYT(url, type = 'audio') {
 
     try {
         console.log(`[YouTube Resolver] Fase 0: SaveTube (${type})...`);
-        const st = await ytResolveSized(targetUrl, type === 'audio' ? 'audio' : 'video');
+        const st = await ytResolveBest(targetUrl, type === 'audio' ? 'audio' : 'video');
         if (st?.url) {
             console.log(`[YouTube Resolver] ✅ Fase 0 OK via SaveTube: ${st.title}`);
             return { dl_url: st.url, title: st.title || title };
