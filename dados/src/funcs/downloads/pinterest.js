@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { pinterestDownload as pinterestApiDownload } from './pinterestApi.js';
 
 const execAsync = promisify(exec);
 
@@ -187,6 +188,18 @@ async function pinterestDL(url) {
 
     const cached = cache.get(`download:${url}`);
     if (cached) return cached;
+
+    // Método principal: API interna do Pinterest (sem Cobalt)
+    try {
+      const r = await pinterestApiDownload(url);
+      const result = r.type === 'video'
+        ? { ok: true, title: r.title, type: 'video', mime: 'video/mp4', urls: [r.url] }
+        : { ok: true, title: r.title, type: 'image', mime: 'image/jpeg', urls: r.urls };
+      cache.set(`download:${url}`, result);
+      return result;
+    } catch (e) {
+      console.warn('[Pinterest DL] API interna falhou, tentando métodos antigos:', e.message);
+    }
 
     let html = null;
 

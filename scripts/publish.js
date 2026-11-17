@@ -38,4 +38,4 @@ console.log('\nFormas de rodar em qualquer lugar:');
 console.log('  npx nazuna-bot init');
 console.log('  npx nazuna-bot pair [numero]');
 console.log('  npx nazuna-bot start');
-console.log('  npx github:Gumballxnz/nazuna-bot init\n');
+console.log('  npx github:Gumballznx/nazuna-bot init\n');

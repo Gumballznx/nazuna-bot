@@ -3016,6 +3016,10 @@ Código: *${roleCode}*`,
         if (!mediakey) {
           throw new Error('Chave de mídia inválida');
         }
+        if (!mediakey.mediaKey || mediakey.mediaKey.length === 0) {
+          // Mídia sem chave (ex.: visualização única já aberta ou mídia expirada): não dá para baixar
+          throw new Error('Mídia indisponível (sem chave de mídia). Peça para reenviar.');
+        }
         const stream = await downloadContentFromMessage(mediakey, mediaType);
         let buffer = Buffer.from([]);
         const MAX_BUFFER_SIZE = 50 * 1024 * 1024;
@@ -3685,7 +3689,7 @@ Código: *${roleCode}*`,
         if (antitoxic && antitoxic.isEnabled && antitoxic.isEnabled(from) && body && ia ) {
 
           const aiFunction = (prompt) => {
-            return ia.makeCognimaRequest('qwen/qwen3-235b-a22b', prompt, null, null)
+            return ia.makeCognimaRequest('qwen/qwen3-235b-a22b', prompt, null, null, [], 1)
               .then(response => response?.data?.choices?.[0]?.message?.content || '');
           };
 

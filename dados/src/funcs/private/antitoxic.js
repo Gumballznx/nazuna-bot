@@ -176,9 +176,13 @@ const quickCheck = (message) => {
     return { isToxic: false, score: 0 };
 };
 
+// Quando a IA falha, fica desligada por um tempo e usamos só a checagem por palavras
+let aiDownUntil = 0;
+const AI_COOLDOWN_MS = 30 * 60 * 1000;
+
 const analyzeMessage = async (message, aiFunction = null) => {
 
-    if (!aiFunction) {
+    if (!aiFunction || Date.now() < aiDownUntil) {
         return quickCheck(message);
     }
 
@@ -208,8 +212,10 @@ Responda apenas o JSON, sem explicações adicionais.`;
                 byAI: true
             };
         }
+        throw new Error('resposta da IA sem JSON');
     } catch (err) {
-        console.error('[ANTITOXIC] Erro na IA:', err.message);
+        aiDownUntil = Date.now() + AI_COOLDOWN_MS;
+        console.warn(`[ANTITOXIC] IA indisponível (${err.message}). Usando só palavras-chave por 30 min.`);
     }
 
     return quickCheck(message);

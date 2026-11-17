@@ -5,6 +5,7 @@ import { pipeline } from 'stream/promises';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { ytResolve } from './savetube.js';
 
 const execAsync = promisify(exec);
 
@@ -105,6 +106,17 @@ export async function resolverUrlYT(url, type = 'audio') {
     const targetUrl = cleanMediaUrl(url);
     let dl_url = null;
     let title = 'YouTube';
+
+    try {
+        console.log(`[YouTube Resolver] Fase 0: SaveTube (${type})...`);
+        const st = await ytResolve(targetUrl, type === 'audio' ? 'audio' : 'video');
+        if (st?.url) {
+            console.log(`[YouTube Resolver] ✅ Fase 0 OK via SaveTube: ${st.title}`);
+            return { dl_url: st.url, title: st.title || title };
+        }
+    } catch (e) {
+        console.log(`[YouTube Resolver] Fase 0 (SaveTube) falhou: ${e.message?.substring(0, 120)}`);
+    }
 
     if (motorDisponivel('fg-senna')) {
         try {
@@ -296,6 +308,10 @@ function ytdlpLocal(url, type, targetPath) {
 }
 
 export async function getYTInfo(url) {
+    try {
+        const st = await ytResolve(cleanMediaUrl(url), 'audio');
+        if (st?.title) return { title: st.title, thumbnail: st.thumbnail, duration: st.duration, dl_url: st.url };
+    } catch (_) {}
     try {
         const fg = await getFg();
         let res = await fg.yta(url);
