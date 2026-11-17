@@ -31,7 +31,7 @@ async function igdlCobalt(url) {
         'https://api-cobalt.eversiege.network'
     ];
 
-    for (const api of apis.slice(0, 6)) {
+    for (const api of apis.slice(0, 3)) {
         try {
             const response = await axios.post(api, payload, {
                 headers: {
@@ -39,7 +39,7 @@ async function igdlCobalt(url) {
                     'Content-Type': 'application/json',
                     'User-Agent': 'Mozilla/5.0'
                 },
-                timeout: 10000
+                timeout: 5000
             });
 
             const data = response.data;
@@ -106,7 +106,7 @@ function tipoPorBuffer(buff) {
 
 // API usada pelo fg-senna, pegando TODOS os itens (carrossel)
 async function igdlTioo(url) {
-    const { data } = await axios.get(`https://backend1.tioo.eu.org/igdl?url=${encodeURIComponent(url)}`, { timeout: 30000 });
+    const { data } = await axios.get(`https://backend1.tioo.eu.org/igdl?url=${encodeURIComponent(url)}`, { timeout: 12000 });
     if (!Array.isArray(data) || !data.length) return null;
     const results = [];
     for (const item of data) {
@@ -123,17 +123,19 @@ async function igdl(url) {
     // Remove parâmetros de rastreio (?igsh=, ?dlrf=...)
     if (/instagram\.com|instagr\.am/i.test(url)) url = url.split('?')[0];
 
+    let apiDown = false;
     try {
         const resTioo = await igdlTioo(url);
         if (resTioo && resTioo.ok) return resTioo;
-    } catch (_) {}
+    } catch (_) { apiDown = true; }
 
     try {
         const resCobalt = await igdlCobalt(url);
         if (resCobalt && resCobalt.ok) return resCobalt;
     } catch (_) {}
 
-    try {
+    // fg.igdl usa a mesma API do igdlTioo: se ela caiu, pula (evita mais 30 s de espera)
+    if (!apiDown) try {
         const fg = await getFg();
         const res = await fg.igdl(url).catch(() => null);
 

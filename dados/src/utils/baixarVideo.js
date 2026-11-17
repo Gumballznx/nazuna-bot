@@ -184,6 +184,15 @@ async function baixarTiktok(url) {
 async function baixarInstagram(url) {
     // Remove parâmetros de rastreio (?dlrf=, ?igsh=, ?utm_...) que atrapalham alguns extratores
     if (/instagram\.com|instagr\.am/i.test(url)) url = url.split('?')[0];
+    // Reel/IGTV é sempre vídeo: o yt-dlp da VPS acessa o Instagram e é o mais confiável quando as APIs caem
+    if (/\/(reel|reels|tv)\//i.test(url)) {
+        try {
+            const ytRes = await ytdlpBaixar(url, 'video');
+            if (ytRes && ytRes.filePath) {
+                return { type: 'video', url: ytRes.filePath, filePath: ytRes.filePath, isFile: true, desc: 'Instagram (HD)' };
+            }
+        } catch (_) {}
+    }
     try {
 
         const igdlMod = await import('../funcs/downloads/igdl.js');
