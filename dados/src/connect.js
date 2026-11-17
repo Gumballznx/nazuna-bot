@@ -439,9 +439,12 @@ async function createGroupMessage(NazunaSock, groupMetadata, participants, setti
     };
     if (settings.image) {
         let profilePicUrl = 'https://raw.githubusercontent.com/nazuninha/uploads/main/outros/1747053564257_bzswae.bin';
-        if (participants.length === 1) {
-            profilePicUrl = await withTimeout(NazunaSock.profilePictureUrl(participants[0], 'image'), 5000, null) || profilePicUrl;
-        }
+        // Foto da pessoa → foto do grupo → imagem padrão (quem sai ou esconde a foto não tem foto disponível)
+        const [ppUser, ppGroup] = await Promise.all([
+            participants.length === 1 ? withTimeout(NazunaSock.profilePictureUrl(participants[0], 'image'), 5000, null) : null,
+            withTimeout(NazunaSock.profilePictureUrl(groupMetadata.id, 'image'), 5000, null)
+        ]);
+        profilePicUrl = ppUser || ppGroup || profilePicUrl;
 
         // Baixa a imagem aqui com tempo máximo (8 s); se não vier, manda só o texto
         let image = null;
