@@ -127,6 +127,8 @@ async function baixarTiktok(url) {
 }
 
 async function baixarInstagram(url) {
+    // Remove parâmetros de rastreio (?dlrf=, ?igsh=, ?utm_...) que atrapalham alguns extratores
+    if (/instagram\.com|instagr\.am/i.test(url)) url = url.split('?')[0];
     try {
 
         try {
