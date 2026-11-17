@@ -98,7 +98,35 @@ async function igdlInstaVideoSave(url) {
     throw new Error('API instavideosave falhou.');
 }
 
+// Descobre o tipo pelo conteúdo (os links do rapidcdn não têm extensão)
+function tipoPorBuffer(buff) {
+    if (buff && buff.length > 12 && buff.toString('utf8', 4, 8) === 'ftyp') return 'video';
+    return 'image';
+}
+
+// API usada pelo fg-senna, pegando TODOS os itens (carrossel)
+async function igdlTioo(url) {
+    const { data } = await axios.get(`https://backend1.tioo.eu.org/igdl?url=${encodeURIComponent(url)}`, { timeout: 30000 });
+    if (!Array.isArray(data) || !data.length) return null;
+    const results = [];
+    for (const item of data) {
+        if (!item?.url) continue;
+        try {
+            const buff = await downloadBuffer(item.url);
+            results.push({ type: tipoPorBuffer(buff), buff });
+        } catch (_) {}
+    }
+    return results.length ? { ok: true, data: results, count: results.length } : null;
+}
+
 async function igdl(url) {
+    // Remove parâmetros de rastreio (?igsh=, ?dlrf=...)
+    if (/instagram\.com|instagr\.am/i.test(url)) url = url.split('?')[0];
+
+    try {
+        const resTioo = await igdlTioo(url);
+        if (resTioo && resTioo.ok) return resTioo;
+    } catch (_) {}
 
     try {
         const resCobalt = await igdlCobalt(url);
@@ -118,11 +146,7 @@ async function igdl(url) {
                         const mediaUrl = item.url || item.dl_url;
                         if (!mediaUrl) continue;
                         const buff = await downloadBuffer(mediaUrl);
-                        const isVideo = mediaUrl.includes('.mp4') || item.type === 'video';
-                        results.push({
-                            type: isVideo ? 'video' : 'image',
-                            buff
-                        });
+                        results.push({ type: tipoPorBuffer(buff), buff });
                     } catch (e) {}
                 }
                 if (results.length > 0) {
@@ -133,8 +157,7 @@ async function igdl(url) {
             const dlUrl = res.dl_url || res.url;
             if (dlUrl) {
                 const buff = await downloadBuffer(dlUrl);
-                const isVideo = dlUrl.includes('.mp4') || res.type === 'video' || !res.thumb;
-                return { ok: true, data: [{ type: isVideo ? 'video' : 'image', buff }], count: 1 };
+                return { ok: true, data: [{ type: tipoPorBuffer(buff), buff }], count: 1 };
             }
         }
     } catch (_) {}

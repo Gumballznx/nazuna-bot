@@ -186,15 +186,6 @@ async function baixarInstagram(url) {
     if (/instagram\.com|instagr\.am/i.test(url)) url = url.split('?')[0];
     try {
 
-        try {
-            const ytRes = await ytdlpBaixar(url, 'video');
-            if (ytRes && ytRes.filePath) {
-                return { type: 'video', url: ytRes.filePath, filePath: ytRes.filePath, isFile: true, desc: 'Instagram (HD)' };
-            }
-        } catch (e) {
-
-        }
-
         const igdlMod = await import('../funcs/downloads/igdl.js');
         const dlFn = igdlMod.dl || igdlMod.default?.dl;
         if (typeof dlFn === 'function') {
@@ -222,6 +213,13 @@ async function baixarInstagram(url) {
     } catch (e) {
         console.error('[Instagram Central Dl Error]', e.message);
     }
+    // Reserva: yt-dlp (só funciona para vídeo)
+    try {
+        const ytRes = await ytdlpBaixar(url, 'video');
+        if (ytRes && ytRes.filePath) {
+            return { type: 'video', url: ytRes.filePath, filePath: ytRes.filePath, isFile: true, desc: 'Instagram (HD)' };
+        }
+    } catch (_) {}
     throw new Error('Instagram: Falha ao extrair mídia via módulo unificado.');
 }
 
