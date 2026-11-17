@@ -399,6 +399,26 @@ function formatMessageText(template, replacements) {
     return text;
 }
 
+// Cache de metadados de grupo: o Baileys consulta o WhatsApp antes de CADA envio para grupo
+// se não houver cache (lento e causa rate-overlimit). Também deixa boas-vindas/adeus instantâneos.
+const groupMetaCache = new Map(); // jid -> { data, ts }
+const GROUP_META_TTL = 5 * 60 * 1000;
+function getCachedGroupMeta(jid) {
+    const c = groupMetaCache.get(jid);
+    return c && (Date.now() - c.ts) < GROUP_META_TTL ? c.data : undefined;
+}
+const withTimeout = (p, ms, fallback) => Promise.race([
+    Promise.resolve(p).catch(() => fallback),
+    new Promise(r => setTimeout(() => r(fallback), ms))
+]);
+async function getGroupMetaFast(sock, jid, timeoutMs = 8000) {
+    const cached = getCachedGroupMeta(jid);
+    if (cached) return cached;
+    const data = await withTimeout(sock.groupMetadata(jid), timeoutMs, null);
+    if (data) groupMetaCache.set(jid, { data, ts: Date.now() });
+    return data || groupMetaCache.get(jid)?.data || null;
+}
+
 async function createGroupMessage(NazunaSock, groupMetadata, participants, settings, isWelcome = true) {
     const jsonGp = await loadGroupSettings(groupMetadata.id);
     const mentions = participants.map(p => p);
@@ -420,14 +440,17 @@ async function createGroupMessage(NazunaSock, groupMetadata, participants, setti
     if (settings.image) {
         let profilePicUrl = 'https://raw.githubusercontent.com/nazuninha/uploads/main/outros/1747053564257_bzswae.bin';
         if (participants.length === 1) {
-            profilePicUrl = await NazunaSock.profilePictureUrl(participants[0], 'image').catch(() => profilePicUrl);
+            profilePicUrl = await withTimeout(NazunaSock.profilePictureUrl(participants[0], 'image'), 5000, null) || profilePicUrl;
         }
 
-        const image = settings.image === 'banner' ? {
-            url: profilePicUrl
-        } : {
-            url: settings.image
-        };
+        // Baixa a imagem aqui com tempo máximo (8 s); se não vier, manda só o texto
+        let image = null;
+        try {
+            const axios = (await import('axios')).default;
+            const imgUrl = settings.image === 'banner' ? profilePicUrl : settings.image;
+            const res = await axios.get(imgUrl, { responseType: 'arraybuffer', timeout: 8000 });
+            image = Buffer.from(res.data);
+        } catch (_) {}
 
         if (image) {
             message.image = image;
@@ -504,10 +527,20 @@ async function handleGroupParticipantsUpdate(NazunaSock, inf) {
             return;
         }
 
-        let groupMetadata = await NazunaSock.groupMetadata(from).catch(err => {
-            console.error(`❌ Erro ao buscar metadados do grupo ${from}: ${err.message}`);
-            return null;
-        });
+        let groupMetadata = await getGroupMetaFast(NazunaSock, from);
+        // Atualiza a lista de membros no cache na hora (o Baileys usa essa lista para criptografar
+        // as mensagens do grupo; quem acabou de entrar precisa estar nela para ler as boas-vindas)
+        if (groupMetadata && Array.isArray(groupMetadata.participants)) {
+            const ids = inf.participants.map(p => typeof p === 'string' ? p : p?.id).filter(Boolean);
+            if (inf.action === 'add') {
+                for (const pid of ids) if (!groupMetadata.participants.some(x => x.id === pid)) groupMetadata.participants.push({ id: pid, admin: null });
+            } else if (inf.action === 'remove') {
+                groupMetadata.participants = groupMetadata.participants.filter(x => !ids.includes(x.id));
+            } else if (inf.action === 'promote' || inf.action === 'demote') {
+                for (const x of groupMetadata.participants) if (ids.includes(x.id)) x.admin = inf.action === 'promote' ? 'admin' : null;
+            }
+            groupMetaCache.set(from, { data: groupMetadata, ts: Date.now() });
+        }
 
         if (!groupMetadata) {
             console.error(`❌ Metadados do grupo ${from} não encontrados.`);
@@ -1100,6 +1133,7 @@ async function createBotSocket(authDir) {
             keepAliveIntervalMs: 30_000,
             defaultQueryTimeoutMs: 60_000,
             msgRetryCounterCache,
+            cachedGroupMetadata: async (jid) => getCachedGroupMeta(jid),
             auth: state,
             signalRepository,
             logger
@@ -1131,6 +1165,8 @@ async function createBotSocket(authDir) {
         }
 
         NazunaSock.ev.on('groups.update', async (updates) => {
+            // Nome/descrição/configurações do grupo mudaram: descarta o cache desses grupos
+            for (const u of updates || []) if (u?.id) groupMetaCache.delete(u.id);
             if (!Array.isArray(updates) || updates.length === 0) return;
 
             if (DEBUG_MODE) {
