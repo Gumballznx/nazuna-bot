@@ -7,6 +7,7 @@ import util from 'util';
 const execPromise = util.promisify(exec);
 import { pipeline } from 'stream/promises';
 import { downloadYT, getYTInfo, resolverUrlYT, getCobaltApis } from './ytHelper.js';
+import { ytResolveSized } from './savetube.js';
 
 let _fg = null;
 async function getFg() {
@@ -194,8 +195,8 @@ async function baixarYoutube(url, formato = 'video') {
 
             const sizeMB = sizeBytes / (1024 * 1024);
 
-            if (sizeBytes === 0 || sizeMB >= 15) {
-                console.log(`[baixarYoutube] Vídeo grande (${sizeMB.toFixed(2)} MB >= 15MB ou indefinido). Ativando Modo Ultra Velocidade (Streaming Direto + Documento)`);
+            if (sizeMB > 60) {
+                console.log(`[baixarYoutube] Vídeo grande (${sizeMB.toFixed(2)} MB > 60MB). Ativando Modo Ultra Velocidade (Streaming Direto + Documento)`);
                 return {
                     type: 'document',
                     url: dl_url,
@@ -205,7 +206,7 @@ async function baixarYoutube(url, formato = 'video') {
                     isUltra: true
                 };
             } else {
-                console.log(`[baixarYoutube] Vídeo pequeno (${sizeMB.toFixed(2)} MB < 15MB). Efetuando download tradicional para reprodução em chat...`);
+                console.log(`[baixarYoutube] Vídeo até 60MB (${sizeMB.toFixed(2)} MB). Efetuando download tradicional para reprodução em chat...`);
             }
         }
 
@@ -222,6 +223,15 @@ async function baixarYoutube(url, formato = 'video') {
 async function baixarFacebook(url) {
     const id = Date.now() + '_' + Math.random().toString(36).substring(2, 6);
     const filePath = path.join(tmpDir, `fb_${id}.mp4`);
+    // 1) API externa + yt-dlp com o link real (links /share/r/ e /share/v/ funcionam)
+    try {
+        const { downloadFacebookToFile } = await import('./facebook.js');
+        if (await downloadFacebookToFile(url, filePath) && fs.existsSync(filePath)) {
+            return { type: 'video', filePath, isFile: true, desc: 'Facebook' };
+        }
+    } catch (e) {
+        console.warn('[Facebook] módulo novo falhou:', e.message);
+    }
     try {
         const cmd = `export PATH=/usr/bin:/usr/local/bin:$PATH && yt-dlp --no-playlist --no-warnings --no-check-certificate -f "b[vcodec^=avc]/b[vcodec^=h264]/hd/sd/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best" --merge-output-format mp4 -o "${filePath}" "${url}"`;
         await new Promise((resolve, reject) => {
@@ -432,6 +442,11 @@ async function verificarEConverterCodec(filePath) {
 async function refinarAudio(filePath) {
     if (!filePath) return filePath;
     try {
+        // Se já é MP3 de verdade (ex.: SaveTube manda 128k), não recodifica: economiza vários segundos
+        try {
+            const { stdout } = await execPromise(`ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "${filePath}"`);
+            if (stdout.trim().toLowerCase() === 'mp3') return filePath;
+        } catch {}
         const finalPath = filePath.replace('.mp3', '_ready.mp3');
 
         await execPromise(`ffmpeg -i "${filePath}" -vn -ar 44100 -ac 2 -b:a 128k -y "${finalPath}"`);
@@ -490,7 +505,7 @@ async function enviarMidia(nazu, from, m, resultado, plataforma) {
             const limit = 60 * 1024 * 1024;
             const isBig = stats && stats.size > limit;
 
-            const captionMsg = `✅ ${plataforma}`;
+            const captionMsg = `✅ ${plataforma}${stats ? `\n📦 ${(stats.size / 1024 / 1024).toFixed(1)} MB` : ''}`;
 
             if (isBig) {
 
@@ -712,8 +727,15 @@ export async function playAudio(nazu, from, m, q, reply) {
         }
 
         const seconds = video.seconds || 0;
-        const audioSize = (seconds * 0.016).toFixed(1);
-        const videoSize = (seconds * 0.1).toFixed(1);
+        // Resolve os links já no menu: mostra o tamanho REAL e reaproveita no download
+        const withTimeout = (p, ms) => Promise.race([p, new Promise(r => setTimeout(() => r(null), ms))]);
+        const [preAudio, preVideo] = await Promise.all([
+            withTimeout(ytResolveSized(video.url, 'audio').catch(() => null), 25000),
+            withTimeout(ytResolveSized(video.url, 'video').catch(() => null), 25000)
+        ]);
+        const mb = b => (b / (1024 * 1024)).toFixed(1);
+        const audioSize = preAudio?.size ? `${mb(preAudio.size)} MB` : `~${(seconds * 0.016).toFixed(1)} MB`;
+        const videoSize = preVideo?.size ? `${mb(preVideo.size)} MB (${preVideo.quality}p)` : `~${(seconds * 0.1).toFixed(1)} MB`;
 
         if (m.key) await nazu.sendMessage(from, { react: { text: '🎧', key: m.key } }).catch(() => {});
 
@@ -727,8 +749,8 @@ export async function playAudio(nazu, from, m, q, reply) {
 │ ━━━━━━━━━━━━━━━━━━━━━━━
 │ Responda com *1* ou *2*:
 │
-│ 1️⃣ = MP3 (Áudio)  ~ ${audioSize} MB 🎵
-│ 2️⃣ = MP4 (Vídeo)  ~ ${videoSize} MB 🎬
+│ 1️⃣ = MP3 (Áudio)  ${audioSize} 🎵
+│ 2️⃣ = MP4 (Vídeo)  ${videoSize} 🎬
 │
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯`;
 
@@ -759,6 +781,8 @@ export async function playAudio(nazu, from, m, q, reply) {
             url: video.url,
             title: video.title,
             thumb: thumb,
+            preAudio,
+            preVideo,
             from: from,
             m: m,
             timeout: setTimeout(() => {
@@ -790,7 +814,7 @@ export async function handlePlayConfirmation(nazu, from, m, text, senderJid) {
 
     (async () => {
         try {
-            const dl = await downloadYT(pending.url, type);
+            const dl = await downloadYT(pending.url, type, type === 'audio' ? pending.preAudio : pending.preVideo);
 
             if (type === 'audio') {
                 let finalPath = dl.filePath;
@@ -806,7 +830,7 @@ export async function handlePlayConfirmation(nazu, from, m, text, senderJid) {
                 await nazu.sendMessage(from, {
                     video: { url: finalPath },
                     mimetype: 'video/mp4',
-                    caption: `🎬 ${pending.title || 'YouTube'}`
+                    caption: `🎬 ${pending.title || 'YouTube'}\n📦 ${(fs.statSync(finalPath).size / (1024 * 1024)).toFixed(1)} MB`
                 }, { quoted: m });
                 if (finalPath !== dl.filePath) {
                     try { fs.unlinkSync(finalPath); } catch {}

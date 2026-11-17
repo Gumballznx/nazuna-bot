@@ -5,7 +5,7 @@ import { pipeline } from 'stream/promises';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { ytResolve } from './savetube.js';
+import { ytResolve, ytResolveSized } from './savetube.js';
 
 const execAsync = promisify(exec);
 
@@ -109,7 +109,7 @@ export async function resolverUrlYT(url, type = 'audio') {
 
     try {
         console.log(`[YouTube Resolver] Fase 0: SaveTube (${type})...`);
-        const st = await ytResolve(targetUrl, type === 'audio' ? 'audio' : 'video');
+        const st = await ytResolveSized(targetUrl, type === 'audio' ? 'audio' : 'video');
         if (st?.url) {
             console.log(`[YouTube Resolver] ✅ Fase 0 OK via SaveTube: ${st.title}`);
             return { dl_url: st.url, title: st.title || title };
@@ -194,7 +194,7 @@ export async function resolverUrlYT(url, type = 'audio') {
     throw new Error('Não foi possível resolver link direto do YouTube.');
 }
 
-export async function downloadYT(url, type = 'audio') {
+export async function downloadYT(url, type = 'audio', pre = null) {
     const filename = `yt_${Date.now()}`;
     const ext = type === 'audio' ? 'mp3' : 'mp4';
     const filePath = path.join(TEMP_DIR, `${filename}.${ext}`);
@@ -204,7 +204,7 @@ export async function downloadYT(url, type = 'audio') {
     let title = 'YouTube';
 
     try {
-        const resolved = await resolverUrlYT(targetUrl, type);
+        const resolved = pre?.url ? { dl_url: pre.url, title: pre.title } : await resolverUrlYT(targetUrl, type);
         dl_url = resolved.dl_url;
         title = resolved.title;
     } catch (resolveErr) {
