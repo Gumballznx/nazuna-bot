@@ -3017,8 +3017,23 @@ Código: *${roleCode}*`,
           throw new Error('Chave de mídia inválida');
         }
         if (!mediakey.mediaKey || mediakey.mediaKey.length === 0) {
-          // Mídia sem chave (ex.: visualização única já aberta ou mídia expirada): não dá para baixar
-          throw new Error('Mídia indisponível (sem chave de mídia). Peça para reenviar.');
+          // Citação de visualização única costuma vir sem a chave: busca a mensagem ORIGINAL no cache
+          try {
+            const stanzaId = info.message?.extendedTextMessage?.contextInfo?.stanzaId
+              || info.message?.imageMessage?.contextInfo?.stanzaId
+              || info.message?.videoMessage?.contextInfo?.stanzaId;
+            const orig = stanzaId && messagesCache?.get?.(`${from}_${stanzaId}`);
+            const om = orig?.message || {};
+            const inner = om.viewOnceMessageV2?.message || om.viewOnceMessageV2Extension?.message || om.viewOnceMessage?.message || om;
+            const found = inner?.[`${mediaType}Message`] || inner?.imageMessage || inner?.videoMessage;
+            if (found?.mediaKey && found.mediaKey.length) mediakey = found;
+          } catch (_) {}
+        }
+        if (!mediakey.mediaKey || mediakey.mediaKey.length === 0) {
+          // O WhatsApp não entregou a chave (comum em visualização única para aparelhos conectados)
+          const err = new Error('Mídia indisponível (sem chave de mídia). Peça para reenviar.');
+          err.semChave = true;
+          throw err;
         }
         const stream = await downloadContentFromMessage(mediakey, mediaType);
         let buffer = Buffer.from([]);
@@ -23492,7 +23507,11 @@ ${prefix}togglecmdvip premium_ia off`);
           });
         } catch (e) {
           console.error(e);
-          await reply("❌ Ocorreu um erro interno. Tente novamente em alguns minutos.");
+          if (e?.semChave) {
+            await reply("⚠️ Essa é uma mídia de *visualização única* e o WhatsApp não entregou o conteúdo dela para o bot.\n\nPeça para reenviar a mídia normalmente (sem visualização única) e use o comando de novo.");
+          } else {
+            await reply("❌ Ocorreu um erro interno. Tente novamente em alguns minutos.");
+          }
         }
         break;
       case 'st2':
