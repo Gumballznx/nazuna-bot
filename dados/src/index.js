@@ -68,6 +68,8 @@ import {
   isValidJid,
   getUserName,
   getLidFromJid,
+  getJidFromLid,
+  registerJidLidPair,
   buildUserId,
   getBotId,
   ensureDirectoryExists,
@@ -1544,6 +1546,10 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
 
     const extractParticipantId = (participant) => {
       if (!participant) return null;
+
+      if (participant.id && participant.lid) {
+        registerJidLidPair(participant.id, participant.lid);
+      }
 
       let id = participant.lid || participant.id || null;
 
@@ -26932,15 +26938,18 @@ ${prefix}uno sair - Sair da partida
 
         if (subCmdMemory === 'ranking' || subCmdMemory === 'rank') {
           const ranking = memoria.getRanking(10);
-          return reply(ranking);
+          return reply(ranking.message || ranking, { mentions: ranking.mentions || [] });
         }
+
+        const playerJid = getJidFromLid(sender) || (sender.endsWith('@s.whatsapp.net') ? sender : null);
+        const gameMentions = [sender, playerJid].filter(Boolean);
 
         if (memoria.hasActiveGame(from)) {
 
           const pos = parseInt(args[0]);
           if (!isNaN(pos)) {
             const result = memoria.makeMove(from, sender, pos);
-            return reply(result.message);
+            return reply(result.message, { mentions: result.mentions || gameMentions });
           }
           return reply(`🎮 Jogo em andamento! Use um número de 1-16 para revelar uma carta.\nOu ${prefix}memoria sair para desistir.`);
         }
@@ -26951,7 +26960,7 @@ ${prefix}uno sair - Sair da partida
         }
 
         const resultStart = memoria.startGame(from, sender, pushname);
-        return reply(resultStart.message);
+        return reply(resultStart.message, { mentions: resultStart.mentions ? [...new Set([...resultStart.mentions, ...gameMentions])] : gameMentions });
         break;
 
       case 'conquistasbn':

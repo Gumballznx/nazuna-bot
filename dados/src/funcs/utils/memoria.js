@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getUserName } from '../../utils/helpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,11 +15,6 @@ const CONFIG = {
     EMOJIS: ['🍎', '🍊', '🍋', '🍇', '🍉', '🍓', '🍒', '🥝', '🍌', '🥭', '🍍', '🥥', '🍑', '🍐', '🫐', '🍈'],
     HIDDEN: '🔲',
     REVEAL_TIME_MS: 2000
-};
-
-const getUserName = (userId) => {
-    if (!userId || typeof userId !== 'string') return 'unknown';
-    return userId.split('@')[0] || userId;
 };
 
 const shuffle = (array) => {

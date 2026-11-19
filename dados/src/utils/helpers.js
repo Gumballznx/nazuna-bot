@@ -3,9 +3,31 @@ import fsPromises from 'fs/promises';
 import pathz from 'path';
 
 let jidLidMemoryCache = new Map();
+let lidJidMemoryCache = new Map();
 let jidLidCacheFile = null;
 let cacheModified = false;
 let saveCacheTimeout = null;
+
+function registerJidLidPair(jid, lid) {
+  if (!jid || !lid || typeof jid !== 'string' || typeof lid !== 'string') return;
+  const cleanJid = jid.includes(':') ? jid.split(':')[0] + (jid.includes('@lid') ? '@lid' : '@s.whatsapp.net') : jid;
+  const cleanLid = lid.includes(':') ? lid.split(':')[0] + (lid.includes('@lid') ? '@lid' : '@s.whatsapp.net') : lid;
+
+  const actualJid = cleanJid.includes('@s.whatsapp.net') ? cleanJid : (cleanLid.includes('@s.whatsapp.net') ? cleanLid : null);
+  const actualLid = cleanLid.includes('@lid') ? cleanLid : (cleanJid.includes('@lid') ? cleanLid : null);
+
+  if (actualJid && actualLid) {
+    jidLidMemoryCache.set(actualJid, actualLid);
+    lidJidMemoryCache.set(actualLid, actualJid);
+    cacheModified = true;
+  }
+}
+
+function getJidFromLid(lid) {
+  if (!lid || typeof lid !== 'string') return null;
+  const cleanLid = lid.includes(':') ? lid.split(':')[0] + '@lid' : lid;
+  return lidJidMemoryCache.get(cleanLid) || null;
+}
 
 function initJidLidCache(cacheFilePath) {
   jidLidCacheFile = cacheFilePath;
@@ -13,12 +35,31 @@ function initJidLidCache(cacheFilePath) {
   try {
     if (fs.existsSync(cacheFilePath)) {
       const data = JSON.parse(fs.readFileSync(cacheFilePath, 'utf-8'));
-      jidLidMemoryCache = new Map(Object.entries(data.mappings || {}));
+      const mappings = data.mappings || {};
+      jidLidMemoryCache = new Map(Object.entries(mappings));
+      lidJidMemoryCache = new Map();
+      for (const [jid, lid] of Object.entries(mappings)) {
+        if (jid && lid) {
+          const cleanJid = jid.includes(':') ? jid.split(':')[0] + '@s.whatsapp.net' : jid;
+          const cleanLid = lid.includes(':') ? lid.split(':')[0] + '@lid' : lid;
+          lidJidMemoryCache.set(cleanLid, cleanJid);
+        }
+      }
       console.log(`✅ Cache JID→LID carregado: ${jidLidMemoryCache.size} entradas`);
     }
   } catch (error) {
     console.warn(`⚠️ Erro ao carregar cache JID→LID: ${error.message}`);
   }
+
+  try {
+    const configPath = pathz.join(pathz.dirname(cacheFilePath), '..', 'src', 'config.json');
+    if (fs.existsSync(configPath)) {
+      const cfg = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      if (cfg.numerodono && cfg.lidowner) {
+        registerJidLidPair(`${cfg.numerodono}@s.whatsapp.net`, cfg.lidowner);
+      }
+    }
+  } catch (_) {}
 
   setInterval(() => {
     if (cacheModified) {
@@ -351,7 +392,12 @@ const isValidJid = (str) => /^\d+@s\.whatsapp\.net$/.test(str);
 const getUserName = (userId) => {
   if (!userId || typeof userId !== 'string') return 'unknown';
   if (userId.includes('@lid')) {
-    return userId.split('@')[0];
+    const cleanLid = userId.includes(':') ? userId.split(':')[0] + '@lid' : userId;
+    const mappedJid = lidJidMemoryCache.get(cleanLid);
+    if (mappedJid) {
+      return mappedJid.split('@')[0];
+    }
+    return cleanLid.split('@')[0];
   } else if (userId.includes('@s.whatsapp.net')) {
     return userId.split('@')[0];
   }
@@ -807,6 +853,8 @@ export {
   isValidLid,
   isValidJid,
   getUserName,
+  getJidFromLid,
+  registerJidLidPair,
   getLidFromJid,
   buildUserId,
   getBotId,
