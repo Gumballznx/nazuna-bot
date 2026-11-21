@@ -56,7 +56,7 @@ import * as ia from './funcs/private/ia.js';
 import * as vipCommandsManager from './utils/vipCommandsManager.js';
 
 import captchaIndex, { initCaptchaIndex, addCaptcha, removeCaptcha, getCaptcha, hasPendingCaptcha } from './utils/captchaIndex.js';
-import baixarVideoLocal, { playAudio, playVideo, handlePlayConfirmation, baixarDireto } from './utils/baixarVideo.js';
+import baixarVideoLocal, { playAudio, playVideo, handlePlayConfirmation, baixarDireto, isCloudLink } from './utils/baixarVideo.js';
 import { downloadTwitter, downloadAPK, downloadSpotify, downloadGDrive, downloadMediafire } from './utils/extraDl.js';
 import fsPromises from 'fs/promises';
 import {
@@ -790,7 +790,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       'streamable.com', 'twitch.tv', 'bandcamp.com'
     ];
 
-    if (supportedSites.some(site => urlLower.includes(site))) {
+    if (supportedSites.some(site => urlLower.includes(site)) || isCloudLink(url)) {
 
        baixarVideoLocal(nazu, from, info, url, (msg) => {}).catch(e => {
          console.error('Erro no autodl background:', e.message);

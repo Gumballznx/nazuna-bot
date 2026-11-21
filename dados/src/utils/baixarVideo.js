@@ -8,6 +8,7 @@ const execPromise = util.promisify(exec);
 import { pipeline } from 'stream/promises';
 import { downloadYT, getYTInfo, resolverUrlYT, getCobaltApis } from './ytHelper.js';
 import { ytResolveSized, ytResolveBest } from './savetube.js';
+import { findCloudLink, cloudSend } from './cloud/cloudlinks.js';
 
 const VIDEO_LIMIT = 60 * 1024 * 1024; // até aqui vai como vídeo; acima, documento (qualidade máxima)
 
@@ -45,11 +46,11 @@ async function prepararVideo(filePath) {
 }
 
 // Envia vídeo do disco na melhor qualidade (vídeo até 60 MB; acima, documento original)
-async function enviarVideoInteligente(nazu, from, m, filePath, caption, fileName = 'video.mp4') {
+async function enviarVideoInteligente(nazu, from, m, filePath, caption, fileName = 'video.mp4', opts = {}) {
     const { path: p, asDocument } = await prepararVideo(filePath);
     try {
     const size = fs.statSync(p).size;
-    const cap = `${caption}${caption ? '\n' : ''}📦 ${(size / 1024 / 1024).toFixed(1)} MB`;
+    const cap = opts.legendaPronta ? caption : `${caption}${caption ? '\n' : ''}📦 ${(size / 1024 / 1024).toFixed(1)} MB`;
     if (!asDocument) {
         return await nazu.sendMessage(from, { video: { url: p }, mimetype: 'video/mp4', caption: cap }, { quoted: m });
     }
@@ -118,6 +119,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const tmpDir = path.join(__dirname, '..', '..', 'tmp');
+// Os módulos de nuvem (Drive, MEGA, MediaFire, Dropbox, Yandex, pCloud, GitHub, npm) gravam aqui
+global.CLOUD_TMP_DIR = global.CLOUD_TMP_DIR || tmpDir;
 if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
 
 setInterval(() => {
@@ -699,17 +702,45 @@ async function enviarMidia(nazu, from, m, resultado, plataforma) {
     }
 }
 
+// Interface de envio da Nazuna para os módulos de nuvem (utils/cloud/*)
+const nazuIO = (nazu, from, m) => ({
+    text: t => nazu.sendMessage(from, { text: t }, { quoted: m }),
+    document: ({ filePath, mimetype, fileName, caption }) =>
+        nazu.sendMessage(from, { document: { url: filePath }, mimetype, fileName, caption }, { quoted: m }),
+    video: ({ filePath, fileName, caption }) => enviarVideoInteligente(nazu, from, m, filePath, caption, fileName, { legendaPronta: true })
+});
+
+/** true se o texto tem um link de Drive/MEGA/MediaFire/Dropbox/Yandex/pCloud/GitHub/npm (arquivo ou pasta). */
+export function isCloudLink(text) {
+    return !!findCloudLink(text);
+}
+
 export default async function baixarVideoLocal(nazu, from, m, q, reply) {
     try {
         if (!q) {
-            return reply('❌ Envie um link válido.\n\n📌 *Sites suportados:*\n• TikTok • YouTube • Instagram\n• Facebook • Twitter/X • Spotify\n• SoundCloud • Pinterest • Reddit\n• Vimeo • Dailymotion • Streamable');
+            return reply('❌ Envie um link válido.\n\n📌 *Sites suportados:*\n• TikTok • YouTube • Instagram\n• Facebook • Twitter/X • Spotify\n• SoundCloud • Pinterest • Reddit\n• Vimeo • Dailymotion • Streamable\n• Drive • MEGA • MediaFire • Dropbox\n• Yandex • pCloud • GitHub • npm (arquivo ou pasta)');
+        }
+
+        // Links de nuvem/código (arquivo ou pasta em .zip) têm tratamento próprio
+        const cloud = findCloudLink(q);
+        if (cloud) {
+            if (m.key) await nazu.sendMessage(from, { react: { text: '⏳', key: m.key } }).catch(() => {});
+            try {
+                await cloudSend(nazuIO(nazu, from, m), cloud);
+                if (m.key) await nazu.sendMessage(from, { react: { text: '✅', key: m.key } }).catch(() => {});
+            } catch (e) {
+                console.error(`[Download ${cloud.label}] Erro:`, e.message);
+                if (m.key) await nazu.sendMessage(from, { react: { text: '❌', key: m.key } }).catch(() => {});
+                await nazu.sendMessage(from, { text: `❎ Erro ao baixar do ${cloud.label}: ${e.message}` }, { quoted: m }).catch(() => {});
+            }
+            return;
         }
 
         const url = q.trim().split(' ')[0];
         const plataforma = detectarPlataforma(url);
 
         if (!plataforma) {
-            return reply('❌ Link não suportado.\n\n📌 *Sites suportados:*\n• TikTok • YouTube • Instagram\n• Facebook • Twitter/X • Spotify\n• SoundCloud • Pinterest • Reddit\n• Vimeo • Dailymotion • Streamable');
+            return reply('❌ Link não suportado.\n\n📌 *Sites suportados:*\n• TikTok • YouTube • Instagram\n• Facebook • Twitter/X • Spotify\n• SoundCloud • Pinterest • Reddit\n• Vimeo • Dailymotion • Streamable\n• Drive • MEGA • MediaFire • Dropbox\n• Yandex • pCloud • GitHub • npm (arquivo ou pasta)');
         }
 
         if (m.key) await nazu.sendMessage(from, { react: { text: '⏳', key: m.key } }).catch(() => {});
