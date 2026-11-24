@@ -19,6 +19,9 @@ ${middleBorder}${menuItemIcon}${prefix}ttp
 ${middleBorder}${menuItemIcon}${prefix}attp
 ${middleBorder}${menuItemIcon}${prefix}sticker
 ${middleBorder}${menuItemIcon}${prefix}sticker2
+${middleBorder}${menuItemIcon}${prefix}figaudio
+${middleBorder}${menuItemIcon}${prefix}stickeraudio
+${middleBorder}${menuItemIcon}${prefix}saudio
 ${middleBorder}${menuItemIcon}${prefix}qc
 ${bottomBorder}
 

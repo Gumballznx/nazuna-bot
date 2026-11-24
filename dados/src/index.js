@@ -35,6 +35,9 @@ import cron from 'node-cron';
 import { fileURLToPath } from 'url';
 
 import { PerformanceOptimizer, getPerformanceOptimizer } from './utils/performanceOptimizer.js';
+import { patchAudioStickerProto } from './funcs/utils/stickerAudio.js';
+
+patchAudioStickerProto();
 
 const optimizer = getPerformanceOptimizer();
 const originalWriteFileSync = fs.writeFileSync;
@@ -827,6 +830,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     pinterest,
     igdl,
     sendSticker,
+    stickerAudio,
     styleText,
     emojiMix,
     upload,
@@ -23543,6 +23547,173 @@ ${prefix}togglecmdvip premium_ia off`);
         } catch (e) {
           console.error(e);
           await reply("❌ Ocorreu um erro interno. Tente novamente em alguns minutos.");
+        }
+        break;
+      case 'figaudio':
+      case 'stickeraudio':
+      case 'saudio':
+        try {
+          const defaultAuthor = `『${pushname}』\n『${nomebot}』\n『${nomedono}』\n『』`;
+          const defaultPack = '👤 Usuario(a)ᮀ۟❁’￫\n🤖 Botᮀ۟❁’￫\n👑 Donoᮀ۟❁’￫\n🌐 Siteᮀ۟❁’￫';
+          const parsed = stickerAudio.parseStickerAudioArgs(q, defaultPack, defaultAuthor);
+
+          const buildUsageText = (pendingEntry) => {
+            let pendingMsg = '';
+            if (pendingEntry?.type === 'sticker') {
+              pendingMsg = `\n\n📌 *Você já tem uma figurinha salva!* Agora responda a um *áudio* com *${prefix}${command}*.`;
+            } else if (pendingEntry?.type === 'audio') {
+              pendingMsg = `\n\n📌 *Você já tem um áudio salvo!* Agora envie ou responda a uma *figurinha, imagem ou vídeo* com *${prefix}${command}*.`;
+            }
+            return `🔊 *Sticker com Áudio*\n\nComo usar *${prefix}${command}*:\n` +
+              `• *Vídeo direto (1 passo):* responda a um vídeo com som usando *${prefix}${command}*\n` +
+              `• *Sticker/Imagem + Áudio (2 passos):*\n` +
+              `  1. Responda a uma figurinha ou imagem com *${prefix}${command}*\n` +
+              `  2. Responda a um áudio (até 10s) com *${prefix}${command}*\n` +
+              `• *Trecho específico:* *${prefix}${command} 0:10* ou *${prefix}${command} 0:05 0:15*\n` +
+              `• *Pack personalizado:* *${prefix}${command} Pack|Autor*\n` +
+              `• *Limpar seleção:* *${prefix}${command} limpar*` +
+              pendingMsg;
+          };
+
+          if (parsed.action === 'clear') {
+            const cleared = stickerAudio.clearPendingAudioSticker(from, sender);
+            return reply(cleared
+              ? '🗑️ Mídia salva limpa com sucesso.'
+              : 'ℹ️ Você não tinha nenhuma mídia pendente para sticker com áudio.');
+          }
+
+          const pending = stickerAudio.getPendingAudioSticker(from, sender);
+          if (parsed.action === 'help') {
+            return reply(buildUsageText(pending));
+          }
+
+          const unwrappedMsg = stickerAudio.unwrapMessageContainer(info.message);
+          const quotedRaw =
+            unwrappedMsg?.extendedTextMessage?.contextInfo?.quotedMessage ||
+            unwrappedMsg?.imageMessage?.contextInfo?.quotedMessage ||
+            unwrappedMsg?.videoMessage?.contextInfo?.quotedMessage ||
+            unwrappedMsg?.documentMessage?.contextInfo?.quotedMessage ||
+            null;
+
+          const target = (quotedRaw ? stickerAudio.extractMediaTarget(quotedRaw) : null) ||
+            stickerAudio.extractMediaTarget(unwrappedMsg);
+
+          if (!target) {
+            return reply(buildUsageText(pending));
+          }
+
+          const buffer = await getFileBuffer(target.media, target.mediaType);
+          await reagir('⏳');
+
+          if (target.kind === 'video') {
+            if (pending?.type === 'audio') {
+              const webpData = await stickerAudio.buildStickerWebp(buffer, {
+                isVideo: true,
+                packname: parsed.packname,
+                author: parsed.author,
+                startSeconds: parsed.startSeconds,
+                maxDuration: 5
+              });
+              await stickerAudio.sendAudioSticker(nazu, from, {
+                preConvertedWebp: webpData,
+                preConvertedAudio: pending.data,
+                quoted: info
+              });
+              stickerAudio.clearPendingAudioSticker(from, sender);
+              await reagir('✅');
+              break;
+            }
+
+            const probe = await stickerAudio.probeMediaBuffer(buffer, 'mp4');
+            const webpData = await stickerAudio.buildStickerWebp(buffer, {
+              isVideo: true,
+              packname: parsed.packname,
+              author: parsed.author,
+              startSeconds: parsed.startSeconds,
+              maxDuration: 5
+            });
+
+            if (probe.hasAudio) {
+              const audioData = await stickerAudio.buildStickerAudioOgg(buffer, {
+                startSeconds: parsed.startSeconds,
+                endSeconds: parsed.endSeconds,
+                maxSeconds: 5,
+                extHint: 'mp4'
+              });
+              await stickerAudio.sendAudioSticker(nazu, from, {
+                preConvertedWebp: webpData,
+                preConvertedAudio: audioData,
+                quoted: info
+              });
+              await reagir('✅');
+              break;
+            }
+
+            stickerAudio.setPendingAudioSticker(from, sender, { type: 'sticker', data: webpData });
+            await reagir('🎵');
+            await reply(`✅ Vídeo convertido para figurinha (sem áudio detectado)!\n\nAgora responda a um *áudio* (até 10s) com *${prefix}${command}* para finalizar.`);
+            break;
+          }
+
+          if (target.kind === 'sticker' || target.kind === 'image') {
+            const webpData = await stickerAudio.buildStickerWebp(buffer, {
+              isVideo: false,
+              packname: parsed.packname,
+              author: parsed.author
+            });
+
+            if (pending?.type === 'audio') {
+              await stickerAudio.sendAudioSticker(nazu, from, {
+                preConvertedWebp: webpData,
+                preConvertedAudio: pending.data,
+                quoted: info
+              });
+              stickerAudio.clearPendingAudioSticker(from, sender);
+              await reagir('✅');
+              break;
+            }
+
+            stickerAudio.setPendingAudioSticker(from, sender, { type: 'sticker', data: webpData });
+            await reagir('🎵');
+            await reply(`✅ ${target.kind === 'sticker' ? 'Figurinha' : 'Imagem'} salva!\n\nAgora responda a um *áudio* (até 10s) com *${prefix}${command}* para criar seu sticker com áudio.`);
+            break;
+          }
+
+          if (target.kind === 'audio') {
+            const audioData = await stickerAudio.buildStickerAudioOgg(buffer, {
+              startSeconds: parsed.startSeconds,
+              endSeconds: parsed.endSeconds,
+              maxSeconds: 10
+            });
+
+            if (pending?.type === 'sticker') {
+              await stickerAudio.sendAudioSticker(nazu, from, {
+                preConvertedWebp: pending.data,
+                preConvertedAudio: audioData,
+                quoted: info
+              });
+              stickerAudio.clearPendingAudioSticker(from, sender);
+              await reagir('✅');
+              break;
+            }
+
+            stickerAudio.setPendingAudioSticker(from, sender, { type: 'audio', data: audioData });
+            await reagir('🖼️');
+            await reply(`✅ Áudio salvo (${audioData.seconds}s)!\n\nAgora envie ou responda a uma *figurinha, imagem ou vídeo* com *${prefix}${command}* para gerar seu sticker com áudio.`);
+            break;
+          }
+        } catch (e) {
+          console.error('[FIGAUDIO ERROR]:', e);
+          try { await reagir('❌'); } catch (_) {}
+          if (e?.semChave) {
+            await reply("⚠️ Essa é uma mídia de *visualização única* e o WhatsApp não entregou o conteúdo dela para o bot.\n\nPeça para reenviar a mídia normalmente e use o comando de novo.");
+          } else if (e?.message === 'NO_AUDIO_STREAM') {
+            await reply("❌ Esse arquivo não contém nenhuma faixa de áudio válida.");
+          } else if (e?.message === 'START_AFTER_END') {
+            await reply("❌ O tempo inicial informado é maior que a duração do áudio.");
+          } else {
+            await reply("❌ Ocorreu um erro ao gerar o sticker com áudio. Tente novamente.");
+          }
         }
         break;
       case 'figualeatoria':

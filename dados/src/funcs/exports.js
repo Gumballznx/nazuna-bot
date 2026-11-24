@@ -115,6 +115,7 @@ async function loadModules() {
             uploadMod,
             tictactoeMod,
             stickerMod,
+            stickerAudioMod,
             commandStatsMod,
             relationshipsMod,
             connect4Mod,
@@ -135,6 +136,7 @@ async function loadModules() {
             import('./utils/upload.js'),
             import('./utils/tictactoe.js'),
             import('./utils/sticker.js'),
+            import('./utils/stickerAudio.js'),
             import('./utils/commandStats.js'),
             import('./utils/relationships.js'),
             import('./utils/connect4.js'),
@@ -156,6 +158,7 @@ async function loadModules() {
         modules.upload = uploadMod.default ?? uploadMod;
         modules.tictactoe = tictactoeMod.default ?? tictactoeMod;
         modules.stickerModule = stickerMod.default ?? stickerMod;
+        modules.stickerAudio = stickerAudioMod.default ?? stickerAudioMod;
         modules.commandStats = commandStatsMod.default ?? commandStatsMod;
         modules.relationshipManager = relationshipsMod.default ?? relationshipsMod;
 
