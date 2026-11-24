@@ -23603,16 +23603,16 @@ ${prefix}togglecmdvip premium_ia off`);
           }
 
           const buffer = await getFileBuffer(target.media, target.mediaType);
-          await reagir('⏳');
+          reagir('⏳').catch(() => {});
 
           if (target.kind === 'video') {
             if (pending?.type === 'audio') {
-              const webpData = await stickerAudio.buildStickerWebp(buffer, {
-                isVideo: true,
+              const { webpData } = await stickerAudio.prepareVideoStickerAssets(buffer, {
                 packname: parsed.packname,
                 author: parsed.author,
                 startSeconds: parsed.startSeconds,
-                maxDuration: 5
+                maxVideoSeconds: 5,
+                extractAudio: false
               });
               await stickerAudio.sendAudioSticker(nazu, from, {
                 preConvertedWebp: webpData,
@@ -23620,37 +23620,32 @@ ${prefix}togglecmdvip premium_ia off`);
                 quoted: info
               });
               stickerAudio.clearPendingAudioSticker(from, sender);
-              await reagir('✅');
+              reagir('✅').catch(() => {});
               break;
             }
 
-            const probe = await stickerAudio.probeMediaBuffer(buffer, 'mp4');
-            const webpData = await stickerAudio.buildStickerWebp(buffer, {
-              isVideo: true,
+            const assets = await stickerAudio.prepareVideoStickerAssets(buffer, {
               packname: parsed.packname,
               author: parsed.author,
               startSeconds: parsed.startSeconds,
-              maxDuration: 5
+              endSeconds: parsed.endSeconds,
+              maxVideoSeconds: 5,
+              maxAudioSeconds: 5,
+              extractAudio: true
             });
 
-            if (probe.hasAudio) {
-              const audioData = await stickerAudio.buildStickerAudioOgg(buffer, {
-                startSeconds: parsed.startSeconds,
-                endSeconds: parsed.endSeconds,
-                maxSeconds: 5,
-                extHint: 'mp4'
-              });
+            if (assets.hasAudio) {
               await stickerAudio.sendAudioSticker(nazu, from, {
-                preConvertedWebp: webpData,
-                preConvertedAudio: audioData,
+                preConvertedWebp: assets.webpData,
+                preConvertedAudio: assets.audioData,
                 quoted: info
               });
-              await reagir('✅');
+              reagir('✅').catch(() => {});
               break;
             }
 
-            stickerAudio.setPendingAudioSticker(from, sender, { type: 'sticker', data: webpData });
-            await reagir('🎵');
+            stickerAudio.setPendingAudioSticker(from, sender, { type: 'sticker', data: assets.webpData });
+            reagir('🎵').catch(() => {});
             await reply(`✅ Vídeo convertido para figurinha (sem áudio detectado)!\n\nAgora responda a um *áudio* (até 10s) com *${prefix}${command}* para finalizar.`);
             break;
           }
