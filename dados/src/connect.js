@@ -1144,6 +1144,26 @@ async function createBotSocket(authDir) {
 
         NazunaSock.ev.on('creds.update', saveCreds);
 
+        // Proteção central das marcações: se algum identificador vier com o sufixo do aparelho
+        // ("5511...:0@s.whatsapp.net"), o texto mostrava "@5511...:0" e a marcação ficava sem efeito.
+        {
+            const rawSendMessage = NazunaSock.sendMessage.bind(NazunaSock);
+            const limparJid = j => (typeof j === 'string' ? j.replace(/:\d+@/, '@') : j);
+            const limparTexto = t => (typeof t === 'string' ? t.replace(/@(\d{6,16}):\d+(?!\d)/g, '@$1') : t);
+            NazunaSock.sendMessage = (jid, content, ...rest) => {
+                try {
+                    if (content && typeof content === 'object') {
+                        if ('text' in content) content.text = limparTexto(content.text);
+                        if ('caption' in content) content.caption = limparTexto(content.caption);
+                        if (Array.isArray(content.mentions)) content.mentions = [...new Set(content.mentions.map(limparJid))];
+                        const ci = content.contextInfo;
+                        if (ci && Array.isArray(ci.mentionedJid)) ci.mentionedJid = [...new Set(ci.mentionedJid.map(limparJid))];
+                    }
+                } catch (_) {}
+                return rawSendMessage(jid, content, ...rest);
+            };
+        }
+
         if (codeMode && !NazunaSock.authState.creds.registered) {
             let phoneNumber;
             if (phoneArg && /^\d{10,15}$/.test(phoneArg)) {
