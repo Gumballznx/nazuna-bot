@@ -31622,7 +31622,9 @@ return reply(`❌ Erro na API. O dono foi notificado.`);
         }
 
         const msgPrefix = loadMsgPrefix();
-        if (['prefix', 'prefixo'].includes(budy2) && msgPrefix) {
+        // Com "só admins" ativo, quem não é admin (nem dono) não recebe resposta do bot, nem a do "prefixo"
+        const soAdmBloqueia = isGroup && isOnlyAdmin && !isGroupAdmin && !isOwner;
+        if (['prefix', 'prefixo'].includes(budy2) && msgPrefix && !soAdmBloqueia) {
           const type = isGroup ? 'grupo' : 'chat';
           const standardizedMessage = `✨ O prefixo atual deste ${type} é: *${prefix}*`;
           await reply(standardizedMessage);
